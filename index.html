@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Briar U Universe — Family Tree &amp; Timeline</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Briar U Universe — Family Tree, Connections &amp; Reading Order</title>
+<meta name="description" content="A free, spoiler-safe fan guide to Elle Kennedy's Off-Campus, Briar U and Campus Diaries series: family trees, friend groups, a connections map, book guide and reading order.">
+<meta name="theme-color" content="#0e1b2c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#0e1b2c;
     --ink-2:#16263c;
+    --ink-3:#1d3150;
     --cream:#f3ede0;
     --cream-2:#e9e0cc;
     --gold:#c9a24b;
@@ -17,256 +21,219 @@
     --maroon:#7c2c2c;
     --maroon-2:#9c3d3d;
     --ice:#8fb8c9;
+    --muted:#a9b3c4;
     --line: rgba(243,237,224,0.16);
     --shadow: 0 18px 40px rgba(0,0,0,0.35);
+    color-scheme: dark;
   }
   *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
   html,body{margin:0;padding:0;}
   body{
     background:
       radial-gradient(1200px 700px at 15% -10%, #1a2c46 0%, transparent 60%),
       radial-gradient(1000px 600px at 110% 10%, #24140f 0%, transparent 55%),
       var(--ink);
+    background-attachment: fixed;
     color:var(--cream);
     font-family:'Public Sans', sans-serif;
     min-height:100vh;
   }
   ::selection{ background:var(--gold); color:var(--ink); }
+  button,select,input,.card,.node{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+  :focus-visible{ outline:2px solid var(--ice); outline-offset:2px; }
+  [hidden]{display:none !important;}
 
-  /* ---------- Header ---------- */
-  header{
-    padding:56px 6vw 28px;
-    position:relative;
+  .wrap{ max-width:1400px; margin:0 auto; padding-left:max(6vw, env(safe-area-inset-left,0px)); padding-right:max(6vw, env(safe-area-inset-right,0px)); }
+
+  /* ---------- Sticky command bar ---------- */
+  header.bar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(14,27,44,0.94);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
+    padding-top:env(safe-area-inset-top,0px);
   }
-  .eyebrow{
-    font-family:'Public Sans',sans-serif;
-    letter-spacing:.28em;
-    text-transform:uppercase;
-    font-size:11px;
-    color:var(--gold-2);
-    font-weight:700;
-    display:flex; align-items:center; gap:10px;
-  }
-  .eyebrow::before{
-    content:"";
-    width:26px; height:1px; background:var(--gold-2);
-    display:inline-block;
-  }
-  h1{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:clamp(2.2rem, 5vw, 4rem);
-    margin:14px 0 10px;
-    letter-spacing:-0.01em;
-    line-height:1.02;
-  }
-  h1 em{ font-style:italic; color:var(--gold-2); font-weight:500;}
-  header p.sub{
-    max-width:640px;
-    color:#cfd7e2;
-    font-size:15.5px;
-    line-height:1.6;
-    margin:0 0 6px;
-  }
-  .crest-row{
-    position:absolute; right:6vw; top:50px;
-    display:flex; gap:10px;
-  }
+  .bar .wrap{ display:grid; gap:10px; padding-top:14px; }
+  .brand-row{ display:flex; align-items:center; gap:14px; justify-content:space-between; }
+  .brand{ display:flex; align-items:center; gap:12px; min-width:0; }
   .crest{
-    width:54px;height:54px;border-radius:50%;
+    width:42px;height:42px;border-radius:50%; flex-shrink:0;
     border:1.5px solid var(--gold);
     display:flex;align-items:center;justify-content:center;
     font-family:'Fraunces',serif; font-weight:600; font-size:12px;
-    color:var(--gold-2);
-    background:rgba(124,44,44,0.18);
+    color:var(--gold-2); background:rgba(124,44,44,0.22);
   }
+  .brand h1{
+    font-family:'Fraunces', serif; font-weight:600;
+    font-size:clamp(1.3rem, 2.6vw, 1.9rem); margin:0; line-height:1.05; letter-spacing:-0.01em;
+  }
+  .brand h1 em{ font-style:italic; color:var(--gold-2); font-weight:500; }
+  .eyebrow{
+    letter-spacing:.24em; text-transform:uppercase; font-size:10.5px;
+    color:var(--gold-2); font-weight:700; margin-top:4px;
+  }
+  .atlas-link{
+    display:inline-flex; align-items:center; gap:8px; flex-shrink:0;
+    font-size:12px; font-weight:600; color:var(--muted); text-decoration:none;
+    border:1px solid var(--line); border-radius:999px; padding:7px 12px;
+  }
+  .atlas-link:hover{ color:var(--cream); border-color:var(--gold-2); }
+  .atlas-link svg{ width:18px; height:17px; }
 
-  /* ---------- Tabs ---------- */
-  nav.tabs{
-    position:sticky; top:0; z-index:50;
-    display:flex; gap:2px; flex-wrap:wrap; align-items:center;
-    padding:14px 6vw;
-    background:rgba(14,27,44,0.92);
-    backdrop-filter: blur(10px);
-    border-bottom:1px solid var(--line);
+  .tools{ display:flex; gap:10px; align-items:center; }
+  .gsearch{ position:relative; flex:1 1 auto; min-width:0; }
+  .gsearch input{
+    width:100%; font-family:'Public Sans',sans-serif; font-size:15px;
+    background:rgba(243,237,224,0.07); border:1px solid var(--line);
+    color:var(--cream); border-radius:999px; padding:11px 16px 11px 40px;
   }
-  .search-wrap{ margin-left:auto; position:relative; }
-  #global-search{
-    font-family:'Public Sans',sans-serif; font-size:13px;
-    background:rgba(243,237,224,0.06); border:1px solid var(--line);
-    color:var(--cream); border-radius:999px; padding:9px 16px 9px 34px;
-    width:190px; transition:.2s ease;
+  .gsearch input:focus{ outline:none; border-color:var(--gold-2); background:rgba(243,237,224,0.1); }
+  .gsearch input::placeholder{ color:#8590a3; }
+  .gsearch > svg{ position:absolute; left:14px; top:50%; transform:translateY(-50%); width:17px; height:17px; stroke:#8590a3; pointer-events:none; }
+  .gres{
+    position:absolute; left:0; right:0; top:calc(100% + 6px); z-index:60;
+    background:var(--ink-2); border:1px solid var(--line); border-radius:14px;
+    max-height:60vh; overflow:auto; box-shadow:var(--shadow);
   }
-  #global-search:focus{ outline:none; border-color:var(--gold-2); width:230px; background:rgba(243,237,224,0.1); }
-  #global-search::placeholder{ color:#8590a3; }
-  .search-wrap::before{
-    content:"⌕"; position:absolute; left:13px; top:50%; transform:translateY(-50%);
-    color:#8590a3; font-size:14px; pointer-events:none;
+  .gres button{
+    display:flex; gap:12px; align-items:baseline; width:100%; text-align:left;
+    padding:11px 14px; border:0; border-bottom:1px solid var(--line);
+    background:none; color:var(--cream); font:inherit; font-size:14px; cursor:pointer;
   }
-  .spoiler-toggle{
-    display:flex; align-items:center; gap:7px; margin-left:14px;
-    font-size:12px; color:#b9c3d2; cursor:pointer; user-select:none;
-  }
-  .spoiler-toggle input{ accent-color:var(--gold-2); cursor:pointer; width:14px; height:14px;}
+  .gres button:last-child{ border-bottom:0; }
+  .gres button:hover, .gres button:focus-visible{ background:rgba(243,237,224,0.07); outline:none; }
+  .gres .k{ font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-2); min-width:74px; flex-shrink:0; }
+  .gres .s{ display:block; color:var(--muted); font-size:12.5px; margin-top:2px; }
+  .gres .hid b, .gres .hid .s{ filter:blur(5px); }
+  .gres .empty{ padding:14px; color:var(--muted); font-size:14px; }
 
-  /* spoiler blur — applied to next-gen (Campus Diaries) content */
-  body.hide-spoilers .card.gen2,
-  body.hide-spoilers .bubble.nextgen,
-  body.hide-spoilers .node.gen2,
-  body.hide-spoilers .book.gen2,
-  body.hide-spoilers .tl-era.gen2{
-    filter: blur(6px);
-    transition: filter .18s ease;
+  .spoiler-btn{
+    flex-shrink:0; display:inline-flex; align-items:center; gap:8px;
+    font-family:'Public Sans',sans-serif; font-size:13px; font-weight:600;
+    color:var(--cream); background:rgba(124,44,44,0.35);
+    border:1px solid var(--maroon-2); border-radius:999px;
+    padding:10px 14px; cursor:pointer; min-height:44px;
   }
-  body.hide-spoilers .card.gen2:hover,
-  body.hide-spoilers .bubble.nextgen:hover,
-  body.hide-spoilers .node.gen2:hover,
-  body.hide-spoilers .book.gen2:hover,
-  body.hide-spoilers .tl-era.gen2:hover{
-    filter: blur(0);
-  }
+  .spoiler-btn:hover{ background:rgba(156,61,61,0.5); }
+  .spoiler-btn svg{ width:17px; height:17px; flex-shrink:0; }
+
+  /* ---------- Tabs (top on desktop, bottom icon bar on phones) ---------- */
+  nav.tabs{ display:flex; gap:4px; overflow-x:auto; scrollbar-width:none; padding-bottom:10px; }
+  nav.tabs::-webkit-scrollbar{ display:none; }
   nav.tabs button{
-    font-family:'Public Sans',sans-serif;
-    font-weight:600;
-    font-size:13.5px;
-    letter-spacing:.02em;
-    color:#b9c3d2;
-    background:transparent;
-    border:1px solid transparent;
-    padding:9px 16px;
-    border-radius:999px;
-    cursor:pointer;
-    transition:.18s ease;
+    font-family:'Public Sans',sans-serif; font-weight:600; font-size:13.5px; letter-spacing:.02em;
+    color:#b9c3d2; background:transparent; border:1px solid transparent;
+    padding:9px 16px; border-radius:999px; cursor:pointer; white-space:nowrap; transition:.18s ease;
   }
-  nav.tabs button:hover{ color:var(--cream); border-color:var(--line);}
-  nav.tabs button.active{
-    color:var(--ink);
-    background:var(--gold-2);
-    border-color:var(--gold-2);
-  }
-  nav.tabs button:focus-visible{ outline:2px solid var(--ice); outline-offset:2px; }
+  nav.tabs button:hover{ color:var(--cream); border-color:var(--line); }
+  nav.tabs button[aria-selected="true"]{ color:var(--ink); background:var(--gold-2); border-color:var(--gold-2); }
+  .tabicon, .ts{ display:none; }
 
-  main{ padding:40px 6vw 100px; max-width:1400px; margin:0 auto; }
+  main .wrap{ padding-top:36px; padding-bottom:60px; }
   section.view{ display:none; animation:fade .35s ease; }
   section.view.active{ display:block; }
   @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  @media (prefers-reduced-motion:reduce){ section.view{animation:none;} *{transition:none !important;} }
 
-  .view-head{ margin-bottom:30px; max-width:720px; }
-  .view-head h2{
-    font-family:'Fraunces',serif; font-weight:600; font-size:clamp(1.6rem,3vw,2.3rem);
-    margin:0 0 8px;
+  .view-head{ margin-bottom:24px; max-width:720px; }
+  .view-head h2{ font-family:'Fraunces',serif; font-weight:600; font-size:clamp(1.6rem,3vw,2.3rem); margin:0 0 8px; }
+  .view-head p{ color:#c3cddb; font-size:15px; line-height:1.6; margin:0; }
+
+  /* ---------- Spoiler status strip + blurring ---------- */
+  .sp-strip{
+    display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px;
+    font-size:13px; color:#c3cddb; margin:0 0 26px;
+    padding:10px 14px; border:1px dashed var(--line); border-radius:12px;
+    background:rgba(124,44,44,0.10);
   }
-  .view-head p{ color:#c3cddb; font-size:14.5px; line-height:1.6; margin:0;}
+  .sp-strip b{ color:var(--gold-2); }
+  .sp-strip button{ font:inherit; font-weight:600; color:var(--gold-2); background:none; border:0; padding:4px 0; cursor:pointer; text-decoration:underline; text-underline-offset:3px; }
+  .sp-hidden{ filter:blur(7px); cursor:pointer; user-select:none; -webkit-user-select:none; transition:filter .2s ease; }
+  .sp-hidden *{ pointer-events:none; }
+  line.sp-hidden{ filter:none; opacity:.08; }
 
   /* ---------- Legend ---------- */
-  .legend{ display:flex; gap:18px; flex-wrap:wrap; margin:18px 0 6px; font-size:12.5px; color:#b9c3d2;}
+  .legend{ display:flex; gap:10px 18px; flex-wrap:wrap; margin:0 0 18px; font-size:12.5px; color:#b9c3d2;}
   .legend span{ display:inline-flex; align-items:center; gap:7px;}
-  .swatch{ width:13px; height:13px; border-radius:3px; display:inline-block;}
+  .swatch{ width:13px; height:13px; border-radius:3px; display:inline-block; flex-shrink:0;}
 
   /* ============ FAMILY TREES ============ */
-  .family-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:34px; }
+  .family-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:30px; }
   .family-block{
     background:linear-gradient(180deg, rgba(233,224,204,0.04), rgba(233,224,204,0.01));
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:26px 22px 30px;
+    border:1px solid var(--line); border-radius:14px; padding:26px 22px 30px; min-width:0;
   }
   .family-name{
     font-family:'Fraunces',serif; font-size:1.15rem; font-weight:600;
-    color:var(--gold-2); margin:0 0 4px;
-    display:flex; align-items:center; gap:8px;
+    color:var(--gold-2); margin:0 0 4px; display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;
   }
   .family-name small{ font-family:'Public Sans',sans-serif; font-weight:500; font-size:11px; color:#8a95a8; }
-
   .tree{ margin-top:20px; }
-  .gen0{
-    text-align:center; padding:10px 12px; border:1px dashed var(--line);
-    border-radius:10px; font-size:12.5px; color:#9fa9ba; margin-bottom:4px;
-  }
+  .gen0{ text-align:center; padding:10px 12px; border:1px dashed var(--line); border-radius:10px; font-size:12.5px; color:#9fa9ba; margin-bottom:4px; }
   .trunk{ width:1px; height:20px; background:var(--line); margin:0 auto; }
-  .couple-row{ display:flex; align-items:stretch; justify-content:center; gap:0; }
+  .couple-row{ display:flex; align-items:stretch; justify-content:center; }
   .card{
-    background:var(--cream);
-    color:var(--ink);
-    border-radius:10px;
-    padding:12px 14px;
-    min-width:150px;
-    box-shadow:var(--shadow);
-    position:relative;
-    border-left:4px solid var(--maroon-2);
+    background:var(--cream); color:var(--ink); border-radius:10px; padding:12px 14px;
+    min-width:150px; box-shadow:var(--shadow); position:relative;
+    border-left:4px solid var(--maroon-2); cursor:pointer;
+    transition:opacity .18s ease, box-shadow .18s ease;
+    scroll-margin-top:200px;
   }
   .card.protag{ border-left-color:var(--gold); }
   .card .nm{ font-family:'Fraunces',serif; font-weight:600; font-size:14.5px; line-height:1.15; }
   .card .role{ font-size:10.5px; color:#6b5f47; text-transform:uppercase; letter-spacing:.04em; margin-top:3px;}
-  .card .bio{ font-size:11px; color:#5c5646; font-style:italic; line-height:1.4; margin-top:6px; max-width:190px; }
-  .card .bk{
-    display:inline-block; margin-top:7px; font-size:10.5px; font-weight:700;
-    background:var(--maroon); color:var(--cream-2); padding:3px 8px; border-radius:5px;
-  }
-  .card .tbd{
-    display:inline-block; margin-top:7px; font-size:9.5px; font-weight:700;
-    letter-spacing:.03em; text-transform:uppercase;
-    background:transparent; color:#8a8060; padding:3px 8px; border-radius:5px;
-    border:1px dashed #b5a97e;
-  }
-  .card{ cursor:pointer; transition:opacity .18s ease, box-shadow .18s ease; }
+  .card .bio{ font-size:11.5px; color:#5c5646; font-style:italic; line-height:1.4; margin-top:6px; max-width:200px; }
+  .card .bk{ display:inline-block; margin-top:7px; font-size:10.5px; font-weight:700; background:var(--maroon); color:var(--cream-2); padding:3px 8px; border-radius:5px; }
+  .card .tbd{ display:inline-block; margin-top:7px; font-size:9.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:#8a8060; padding:3px 8px; border-radius:5px; border:1px dashed #b5a97e; }
   .card.dim{ opacity:.22; }
   .card.lit{ box-shadow:0 0 0 2px var(--gold-2), var(--shadow); }
-  .bubble{ transition:opacity .18s ease, box-shadow .18s ease; }
-  .bubble.dim{ opacity:.2; }
-  .bubble.lit{ box-shadow:0 0 0 2px var(--gold-2), var(--shadow); }
-  .card .offbriar, .agebadge + .offbriar-inline{
-    display:inline-block; margin-top:7px; font-size:9.5px; font-weight:700;
-    letter-spacing:.03em; text-transform:uppercase;
-    background:repeating-linear-gradient(135deg, #5b5142, #5b5142 4px, #6b6047 4px, #6b6047 8px);
-    color:#f0e9d8; padding:3px 8px; border-radius:5px;
-  }
-  .ring{
-    align-self:center; padding:0 10px; color:var(--gold-2); font-size:16px;
-  }
+  .flash{ box-shadow:0 0 0 3px var(--ice), var(--shadow) !important; }
+  .ring{ align-self:center; padding:0 10px; color:var(--gold-2); font-size:16px; }
   .children-wrap{ display:flex; flex-direction:column; align-items:center; }
-  .children{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:0; position:relative; padding-top:18px;}
-  .children::before{
-    content:""; position:absolute; top:0; left:50%; width:1px; height:18px;
-    background:var(--line); transform:translateX(-50%);
-  }
+  .children{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; position:relative; padding-top:18px;}
+  .children::before{ content:""; position:absolute; top:0; left:50%; width:1px; height:18px; background:var(--line); transform:translateX(-50%); }
   .child{ display:flex; flex-direction:column; align-items:center; }
   .child .branch{ width:1px; height:14px; background:var(--line);}
+  .tree-note{ text-align:center; margin-top:10px; font-size:12.5px; color:#9aa5b6; line-height:1.5; }
+  .tree-note b{ color:var(--gold-2); }
 
   /* ============ FRIEND GROUPS ============ */
-  .friend-groups{ display:flex; flex-direction:column; gap:48px; }
-  .fg{
-    border:1px solid var(--line); border-radius:16px; padding:30px 26px;
-    background:linear-gradient(180deg, rgba(124,44,44,0.08), rgba(124,44,44,0.01));
-  }
+  .friend-groups{ display:flex; flex-direction:column; gap:40px; }
+  .fg{ border:1px solid var(--line); border-radius:16px; padding:28px 24px; background:linear-gradient(180deg, rgba(124,44,44,0.08), rgba(124,44,44,0.01)); scroll-margin-top:200px; }
   .fg-title{ display:flex; align-items:baseline; gap:12px; margin-bottom:6px; flex-wrap:wrap;}
   .fg-title h3{ font-family:'Fraunces',serif; font-size:1.3rem; margin:0; color:var(--gold-2); font-weight:600;}
   .fg-title span{ font-size:12px; color:#9aa5b6; }
-  .fg-note{ font-size:13.5px; color:#c3cddb; max-width:640px; margin:6px 0 20px; line-height:1.55;}
-  .cluster{ display:flex; flex-wrap:wrap; gap:14px; }
+  .fg-note{ font-size:14px; color:#c3cddb; max-width:640px; margin:6px 0 20px; line-height:1.55;}
+  .cluster{ display:flex; flex-wrap:wrap; gap:12px; }
   .bubble{
-    background:var(--cream); color:var(--ink); border-radius:999px;
-    padding:9px 16px; font-size:13px; font-weight:600; font-family:'Public Sans',sans-serif;
-    box-shadow:var(--shadow); position:relative; cursor:default;
-    border:1.5px solid transparent;
+    background:var(--cream); color:var(--ink); border-radius:999px; padding:9px 16px;
+    font-size:13px; font-weight:600; box-shadow:var(--shadow); border:1.5px solid transparent;
+    transition:opacity .18s ease, box-shadow .18s ease;
   }
   .bubble.hockey{ border-color:var(--maroon-2); }
   .bubble.girls{ border-color:var(--ice); }
   .bubble.nextgen{ border-color:var(--gold); }
   .bubble small{ display:block; font-weight:500; font-size:10.5px; color:#6b6250; margin-top:2px;}
-  .link-note{
-    font-size:12.5px; color:#a9b3c4; margin-top:16px; padding-top:14px;
-    border-top:1px dashed var(--line); line-height:1.7;
-  }
+  .bubble.dim{ opacity:.2; }
+  .bubble.lit{ box-shadow:0 0 0 2px var(--gold-2), var(--shadow); }
+  .link-note{ font-size:13px; color:#a9b3c4; margin-top:16px; padding-top:14px; border-top:1px dashed var(--line); line-height:1.7; }
   .link-note b{ color:var(--gold-2); font-weight:700; }
 
   /* ============ CONNECTIONS MAP ============ */
+  .map-controls{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:14px; }
+  .map-controls select, .map-controls button{
+    font-family:'Public Sans',sans-serif; font-size:14px; color:var(--cream);
+    background:rgba(243,237,224,0.07); border:1px solid var(--line); border-radius:999px;
+    padding:10px 14px; min-height:44px; cursor:pointer;
+  }
+  .map-controls select{ flex:1 1 220px; max-width:360px; }
+  .map-controls select option{ background:var(--ink-2); color:var(--cream); }
+  .split{ display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:16px; align-items:start; }
   .map-scroll{
-    overflow-x:auto; overflow-y:hidden;
-    border:1px solid var(--line); border-radius:16px;
+    overflow:auto; border:1px solid var(--line); border-radius:16px; max-height:72vh;
     background:linear-gradient(180deg, rgba(233,224,204,0.03), rgba(233,224,204,0.01));
-    padding:10px;
+    padding:10px; -webkit-overflow-scrolling:touch;
   }
   .map-canvas{ position:relative; width:2260px; height:980px; }
   #map-svg{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
@@ -274,112 +241,221 @@
     position:absolute; transform:translate(-50%,-50%);
     background:var(--cream); color:var(--ink); border-radius:9px;
     padding:7px 11px; min-width:108px; max-width:150px; text-align:center;
-    box-shadow:var(--shadow); cursor:pointer; z-index:2;
-    border:2px solid transparent;
-    transition:.15s ease;
+    box-shadow:var(--shadow); cursor:pointer; z-index:2; border:2px solid transparent; transition:.15s ease;
+    font:inherit;
   }
   .node .n-name{ font-family:'Fraunces',serif; font-weight:600; font-size:12.5px; line-height:1.15;}
   .node .n-book{ font-size:8.5px; color:#7a7259; margin-top:2px; text-transform:uppercase; letter-spacing:.03em;}
-  .node.gen0{ background:transparent; border:1px dashed var(--line); color:#b9c3d2; box-shadow:none; padding:5px 10px;}
-  .node.gen0 .n-name{ font-size:11px; font-weight:600; color:#b9c3d2;}
-  .node.notbriar{
-    background:repeating-linear-gradient(135deg, #5b5142, #5b5142 4px, #6b6047 4px, #6b6047 8px);
-    color:#f0e9d8;
-  }
+  .node.gen0{ background:var(--ink-2); border:1px dashed var(--line); color:#b9c3d2; box-shadow:none; padding:5px 10px;}
+  .node.gen0 .n-name{ font-size:11px; color:#b9c3d2;}
+  .node.notbriar{ background:repeating-linear-gradient(135deg, #5b5142, #5b5142 4px, #6b6047 4px, #6b6047 8px); color:#f0e9d8; }
   .node.notbriar .n-name{ color:#f0e9d8; }
   .node.notbriar .n-flag{ font-size:8.5px; color:#f0e9d8; opacity:.85; text-transform:uppercase; letter-spacing:.03em; margin-top:2px; font-weight:700;}
   .node.dim{ opacity:.18; }
   .node.lit{ border-color:var(--gold-2); z-index:3; }
+  .node.focus{ border-color:var(--ice); z-index:4; }
   .edge{ transition:.15s ease; }
   .edge.dim{ opacity:.06; }
   .edge.lit{ opacity:1 !important; stroke-width:3.2 !important; }
+
+  .panel{
+    background:var(--ink-2); border:1px solid var(--line); border-radius:16px; padding:18px;
+    position:sticky; top:200px;
+  }
+  .panel .p-eyebrow{ font-size:10.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-2); }
+  .panel h3{ font-family:'Fraunces',serif; font-weight:600; font-size:1.35rem; margin:6px 0 4px; }
+  .panel .p-book{ font-size:13px; color:var(--muted); }
+  .panel .p-group{ margin-top:14px; }
+  .panel .p-group h4{ margin:0 0 6px; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#8a95a8; display:flex; align-items:center; gap:7px; }
+  .panel ul{ list-style:none; margin:0; padding:0; display:grid; gap:4px; }
+  .panel li button{ font:inherit; font-size:14px; color:var(--cream); background:none; border:0; padding:3px 0; cursor:pointer; text-align:left; text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:3px; }
+  .panel li button:hover{ color:var(--gold-2); }
+  .panel li .hid{ color:var(--muted); font-style:italic; font-size:13px; }
+  .panel .p-empty{ color:var(--muted); font-size:14px; margin:6px 0 0; }
+  .sheet-close{ display:none; }
 
   /* ============ BOOK GUIDE ============ */
   .series-block{ margin-bottom:46px; }
   .series-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:18px; flex-wrap:wrap;}
   .series-head h3{ font-family:'Fraunces',serif; font-size:1.5rem; margin:0; font-weight:600;}
-  .series-head .tag{
-    font-size:11px; letter-spacing:.06em; text-transform:uppercase; font-weight:700;
-    color:var(--ink); background:var(--ice); padding:4px 10px; border-radius:6px;
-  }
-  .series-head p{ width:100%; color:#c3cddb; font-size:13.5px; margin:2px 0 0; max-width:680px; line-height:1.55;}
+  .series-head .tag{ font-size:11px; letter-spacing:.06em; text-transform:uppercase; font-weight:700; color:var(--ink); background:var(--ice); padding:4px 10px; border-radius:6px; }
+  .series-head p{ width:100%; color:#c3cddb; font-size:14px; margin:2px 0 0; max-width:680px; line-height:1.55;}
   .book-row{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; }
   .book{
     background:var(--cream); color:var(--ink); border-radius:12px; padding:16px 16px 18px;
     box-shadow:var(--shadow); display:flex; flex-direction:column; gap:6px;
-    border-top:5px solid var(--gold);
+    border-top:5px solid var(--gold); scroll-margin-top:200px;
   }
-  .book.upcoming{ opacity:.72; border-top-color:#9aa5b6; border-style:dashed; border-top-width:3px;}
+  .book.upcoming{ border-top-color:#9aa5b6; border-top-style:dashed; border-top-width:3px; }
   .book .num{ font-size:11px; font-weight:700; color:var(--maroon); letter-spacing:.05em;}
-  .book .title{ font-family:'Fraunces',serif; font-weight:600; font-size:16.5px; line-height:1.2;}
-  .book .couple{ font-size:12.5px; color:#4a4232; font-weight:600;}
-  .book .yr{ font-size:11px; color:#7a7259; margin-top:auto; padding-top:6px;}
+  .book .title{ font-family:'Fraunces',serif; font-weight:600; font-size:17px; line-height:1.2;}
+  .book .couple{ font-size:13px; color:#4a4232; font-weight:600;}
+  .book .yr{ font-size:11.5px; color:#7a7259; margin-top:auto; padding-top:6px;}
+  .book .buy{
+    align-self:flex-start; margin-top:8px; font-size:12px; font-weight:700; color:var(--maroon);
+    text-decoration:none; border:1.5px solid var(--maroon); border-radius:999px; padding:6px 12px;
+  }
+  .book .buy:hover{ background:var(--maroon); color:var(--cream); }
 
   /* ============ TIMELINE ============ */
   .timeline-wrap{ position:relative; padding-left:26px; }
-  .timeline-wrap::before{
-    content:""; position:absolute; left:6px; top:6px; bottom:6px; width:2px;
-    background:linear-gradient(var(--gold), var(--maroon-2), var(--ice));
-  }
+  .timeline-wrap::before{ content:""; position:absolute; left:6px; top:6px; bottom:6px; width:2px; background:linear-gradient(var(--gold), var(--maroon-2), var(--ice)); }
   .tl-era{ margin-bottom:44px; position:relative; }
-  .tl-dot{
-    position:absolute; left:-26px; top:4px; width:14px; height:14px; border-radius:50%;
-    background:var(--gold-2); border:3px solid var(--ink);
-  }
+  .tl-dot{ position:absolute; left:-26px; top:4px; width:14px; height:14px; border-radius:50%; background:var(--gold-2); border:3px solid var(--ink); }
   .tl-era h3{ font-family:'Fraunces',serif; font-size:1.3rem; margin:0 0 4px; color:var(--gold-2);}
-  .tl-era .when{ font-size:12px; color:#9aa5b6; margin-bottom:14px;}
+  .tl-era .when{ font-size:12.5px; color:#9aa5b6; margin-bottom:14px;}
   .tl-books{ display:flex; flex-direction:column; gap:10px; }
-  .tl-book{
-    display:flex; align-items:center; gap:14px; background:rgba(243,237,224,0.05);
-    border:1px solid var(--line); border-radius:10px; padding:10px 16px;
-  }
-  .tl-book .idx{ font-family:'Fraunces',serif; font-weight:600; color:var(--maroon-2); font-size:15px; width:22px;}
-  .tl-book .info b{ font-size:14px; }
-  .tl-book .info span{ display:block; font-size:12px; color:#a9b3c4; margin-top:2px;}
+  .tl-book{ display:flex; align-items:center; gap:14px; background:rgba(243,237,224,0.05); border:1px solid var(--line); border-radius:10px; padding:10px 16px; }
+  .tl-book .idx{ font-family:'Fraunces',serif; font-weight:600; color:var(--maroon-2); font-size:15px; width:22px; flex-shrink:0;}
+  .tl-book .info{ font-size:14px; line-height:1.45; }
+  .tl-book .info span.n{ display:block; font-size:12.5px; color:#a9b3c4; margin-top:2px;}
 
-  footer{
-    text-align:center; padding:30px; font-size:11.5px; color:#6d7688;
-    border-top:1px solid var(--line);
+  /* ---------- Footer ---------- */
+  footer{ border-top:1px solid var(--line); padding:30px 0 40px; font-size:12.5px; color:#8a95a8; line-height:1.65; }
+  footer .wrap{ display:flex; flex-direction:column; gap:10px; }
+  footer p{ margin:0; }
+  .foot-actions{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:6px; }
+  .kofi, .home-link{
+    display:inline-flex; align-items:center; gap:8px; min-height:44px;
+    font-size:14px; font-weight:700; text-decoration:none; border-radius:999px; padding:10px 18px;
   }
+  .kofi{ background:var(--gold-2); color:var(--ink); }
+  .kofi:hover{ background:var(--cream); color:var(--ink); }
+  .home-link{ border:1px solid var(--line); color:var(--cream); }
+  .home-link:hover{ border-color:var(--gold-2); color:var(--gold-2); }
+  .kofi svg, .home-link svg{ width:18px; height:18px; flex-shrink:0; }
 
-  @media (max-width:640px){
-    .crest-row{ display:none; }
-    header{ padding:40px 5vw 22px;}
-    main{ padding:30px 5vw 80px;}
+  /* ---------- Spoiler dialog ---------- */
+  dialog.sp-dialog{
+    border:1px solid var(--line); border-radius:18px; padding:0; max-width:440px; width:calc(100% - 32px);
+    background:var(--ink-2); color:var(--cream); box-shadow:0 30px 80px rgba(0,0,0,.6);
+  }
+  dialog.sp-dialog::backdrop{ background:rgba(6,12,20,.72); backdrop-filter:blur(3px); }
+  .sp-dialog .d-in{ padding:26px 24px 22px; }
+  .sp-dialog h2{ font-family:'Fraunces',serif; font-weight:600; font-size:1.55rem; margin:8px 0 8px; }
+  .sp-dialog p{ margin:0 0 18px; color:#c3cddb; font-size:14.5px; line-height:1.55; }
+  .sp-opts{ display:grid; gap:10px; }
+  .sp-opts button{
+    display:block; width:100%; text-align:left; font:inherit; cursor:pointer;
+    background:rgba(243,237,224,0.06); color:var(--cream);
+    border:1.5px solid var(--line); border-radius:12px; padding:13px 16px;
+  }
+  .sp-opts button:hover, .sp-opts button.cur{ border-color:var(--gold-2); background:rgba(228,200,119,0.1); }
+  .sp-opts b{ display:block; font-size:15px; }
+  .sp-opts span{ display:block; font-size:12.5px; color:var(--muted); margin-top:2px; }
+  .sp-dialog .fine{ font-size:12px; color:#8a95a8; margin:14px 0 0; }
+
+  /* ---------- Phones ---------- */
+  @media (max-width:700px){
+    .wrap{ padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px)); }
+    /* No blur on the header here: a backdrop-filter would trap the fixed bottom tab bar inside it */
+    header.bar{ backdrop-filter:none; -webkit-backdrop-filter:none; background:var(--ink); }
+    .bar .wrap{ padding-top:10px; padding-bottom:10px; gap:8px; }
+    .crest{ width:34px; height:34px; font-size:10.5px; }
+    .brand h1{ font-size:1.2rem; }
+    .eyebrow{ display:none; }
+    .atlas-link span{ display:none; }
+    .atlas-link{ padding:7px 9px; }
+    .spoiler-btn .sb-label{ display:none; }
+    .spoiler-btn{ padding:10px 12px; }
+
+    nav.tabs{
+      position:fixed; left:0; right:0; bottom:0; z-index:55; gap:0; overflow:visible;
+      background:rgba(14,27,44,0.97); border-top:1px solid var(--line);
+      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      padding:4px max(4px,env(safe-area-inset-right,0px)) calc(4px + env(safe-area-inset-bottom,0px)) max(4px,env(safe-area-inset-left,0px));
+    }
+    nav.tabs button{
+      flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;
+      padding:6px 2px; min-height:54px; font-size:10.5px; border:0; border-radius:10px; background:none;
+    }
+    nav.tabs button[aria-selected="true"]{ color:var(--gold-2); background:none; }
+    nav.tabs button:hover{ border:0; }
+    .tabicon{ display:block; width:23px; height:23px; }
+    .tl{ display:none; } .ts{ display:block; }
+
+    main .wrap{ padding-top:22px; padding-bottom:calc(100px + env(safe-area-inset-bottom,0px)); }
+    footer{ padding-bottom:calc(96px + env(safe-area-inset-bottom,0px)); }
+    .card, .fg, .book{ scroll-margin-top:150px; }
+
+    .family-grid{ grid-template-columns:1fr; gap:18px; }
+    .family-block{ padding:20px 12px 22px; }
+    .card{ min-width:0; padding:11px 12px; }
+    .couple-row{ width:100%; }
+    .couple-row .card{ flex:1 1 0; }
+    .ring{ padding:0 6px; }
+    .children{ gap:10px; width:100%; }
+    .child{ flex:1 1 130px; min-width:0; }
+    .child > .card{ width:100%; }
+    .child:has(.couple-row){ flex-basis:100%; }
+    .card .bio{ max-width:none; }
+    .fg{ padding:22px 16px; }
+
+    .split{ grid-template-columns:1fr; }
+    .map-scroll{ max-height:62vh; border-radius:12px; }
+    .panel{
+      position:fixed; left:0; right:0; z-index:52; top:auto;
+      bottom:calc(62px + env(safe-area-inset-bottom,0px));
+      max-height:44vh; overflow:auto; -webkit-overflow-scrolling:touch;
+      border-radius:16px 16px 0 0; border-bottom:0; box-shadow:0 -10px 30px rgba(0,0,0,.45);
+      padding:16px max(16px,env(safe-area-inset-right,0px)) 18px max(16px,env(safe-area-inset-left,0px));
+    }
+    .panel.idle{ display:none; }
+    .sheet-close{
+      display:block; position:absolute; top:12px; right:max(12px,env(safe-area-inset-right,0px));
+      font:inherit; font-size:13px; font-weight:600; color:var(--cream);
+      background:rgba(243,237,224,0.08); border:1px solid var(--line); border-radius:999px; padding:7px 13px; cursor:pointer;
+    }
+    .legend{ font-size:12px; gap:8px 14px; }
+    .tl-book{ padding:10px 12px; gap:10px; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="crest-row"><div class="crest">BU</div></div>
-  <div class="eyebrow">Off&#8209;Campus &middot; Briar U &middot; Campus Diaries</div>
-  <h1>The <em>Briar University</em><br>Universe, Mapped</h1>
-  <p class="sub">A fan reference tracing three generations of hockey players, their families, their friend groups, and which Elle Kennedy book each one belongs to &mdash; built from the series' own published family tree plus book synopses.</p>
+<!-- ======================= COMMAND BAR ======================= -->
+<header class="bar">
+  <div class="wrap">
+    <div class="brand-row">
+      <div class="brand">
+        <div class="crest" aria-hidden="true">BU</div>
+        <div>
+          <h1>The <em>Briar U</em> Universe</h1>
+          <div class="eyebrow">Off&#8209;Campus &middot; Briar U &middot; Campus Diaries</div>
+        </div>
+      </div>
+      <a class="atlas-link" href="https://readersatlas.com" aria-label="The Reader's Atlas: more character guides">
+        <svg viewBox="0 0 140 130" aria-hidden="true"><path d="M28 60 A46 46 0 1 0 112 60 A38 38 0 1 1 28 60 Z" fill="#e4c877"/><path d="M36 74 C48 68 60 69 70 76 C80 69 92 68 104 74 L104 100 C92 94 80 95 70 102 C60 95 48 94 36 100 Z" fill="#f3ede0"/><path d="M70 4 L75 15 L86 20 L75 25 L70 36 L65 25 L54 20 L65 15 Z" fill="#e4c877"/></svg>
+        <span>The Reader's Atlas</span>
+      </a>
+    </div>
+
+    <div class="tools">
+      <div class="gsearch">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="gq" type="search" placeholder="Search characters, books, families…" autocomplete="off" aria-label="Search the whole guide">
+        <div class="gres" id="gres" hidden></div>
+      </div>
+      <button class="spoiler-btn" id="sp-open" type="button" aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M4 4l16 16"/></svg>
+        <span class="sb-label">Spoilers</span>
+      </button>
+    </div>
+
+    <nav class="tabs" role="tablist" id="tabs" aria-label="Guide sections"></nav>
+  </div>
 </header>
 
-<nav class="tabs">
-  <button data-view="families" class="active">Family Trees</button>
-  <button data-view="friends">Friend Groups</button>
-  <button data-view="map">Connections Map</button>
-  <button data-view="books">Book Guide</button>
-  <button data-view="timeline">Timeline</button>
-  <div class="search-wrap">
-    <input type="text" id="global-search" placeholder="Find a character…" autocomplete="off">
-  </div>
-  <label class="spoiler-toggle">
-    <input type="checkbox" id="spoiler-toggle">
-    Hide Campus Diaries spoilers
-  </label>
-</nav>
-
 <main>
+<div class="wrap">
+
+  <div class="sp-strip" id="sp-strip"></div>
 
   <!-- ======================= FAMILIES ======================= -->
-  <section class="view active" id="families">
+  <section class="view" id="families" role="tabpanel">
     <div class="view-head">
       <h2>Four Families, Three Generations</h2>
-      <p>Gold-edged cards are book protagonists; maroon-edged cards are family members who haven't (yet) led their own book. Lines trace parent &rarr; child.</p>
+      <p>Gold-edged cards are book protagonists; maroon-edged cards are family members who haven't (yet) led their own book. Tap any card to highlight their family and partner.</p>
     </div>
     <div class="legend">
       <span><i class="swatch" style="background:var(--gold)"></i> Book protagonist</span>
@@ -389,7 +465,7 @@
     <div class="family-grid">
 
       <!-- GRAHAM -->
-      <div class="family-block">
+      <div class="family-block" id="fam-graham">
         <p class="family-name">The Grahams <small>Off-Campus &rarr; Campus Diaries</small></p>
         <div class="tree">
           <div class="gen0">Phil Graham &amp; Mrs. Graham</div>
@@ -401,22 +477,20 @@
           </div>
           <div class="children-wrap">
             <div class="children">
-              <div class="child">
-                <div class="branch"></div>
-                <div data-id="wyatt" class="card protag gen2"><div class="nm">Wyatt Graham</div><div class="role">Son &middot; hockey</div><div class="bio">Garrett &amp; Hannah's son &mdash; a musician at heart, raised in a house full of hockey.</div><span class="bk">LOVE SONG</span></div>
+              <div class="child"><div class="branch"></div>
+                <div data-id="wyatt" data-sp="2" class="card protag"><div class="nm">Wyatt Graham</div><div class="role">Son &middot; hockey</div><div class="bio">Garrett &amp; Hannah's son &mdash; a musician at heart, raised in a house full of hockey.</div><span class="bk">LOVE SONG</span></div>
               </div>
-              <div class="child">
-                <div class="branch"></div>
-                <div data-id="gigi" class="card protag gen2"><div class="nm">Gigi Graham</div><div class="role">Daughter</div><div class="bio">Garrett &amp; Hannah's daughter, following her dad onto the ice as team manager.</div><span class="bk">GRAHAM EFFECT</span></div>
+              <div class="child"><div class="branch"></div>
+                <div data-id="gigi" data-sp="2" class="card protag"><div class="nm">Gigi Graham</div><div class="role">Daughter</div><div class="bio">Garrett &amp; Hannah's daughter, following her dad onto the ice as team manager.</div><span class="bk">GRAHAM EFFECT</span></div>
               </div>
             </div>
           </div>
-          <div style="text-align:center;margin-top:6px;font-size:12px;color:#9aa5b6;">Gigi marries <b style="color:var(--gold-2)">Luke Ryder</b> (co-captain, her love interest in <i>The Graham Effect</i>)</div>
+          <div class="tree-note" data-sp="2">Gigi marries <b>Luke Ryder</b> (co-captain, her love interest in <i>The Graham Effect</i>)</div>
         </div>
       </div>
 
       <!-- LOGAN -->
-      <div class="family-block">
+      <div class="family-block" id="fam-logan">
         <p class="family-name">The Logans <small>Off-Campus &rarr; Campus Diaries</small></p>
         <div class="tree">
           <div class="gen0">Ward Logan &amp; Jean Logan</div>
@@ -433,20 +507,19 @@
                   <div data-id="grace" class="card protag"><div class="nm">Grace Ivers</div><div class="role">Photographer</div><div class="bio">Aspiring photographer who's sworn off hockey players &mdash; until Logan won't take no for an answer.</div><span class="bk">THE MISTAKE</span></div>
                 </div>
                 <div class="children" style="margin-top:14px;">
-                  <div class="child">
-                    <div class="branch"></div>
-                    <div data-id="blake" class="card protag gen2"><div class="nm">Blake Logan</div><div class="role">Son &middot; hockey</div><div class="bio">Logan &amp; Grace's son, Wyatt's best friend and eventually something more.</div><span class="bk">LOVE SONG</span></div>
+                  <div class="child"><div class="branch"></div>
+                    <div data-id="blake" data-sp="2" class="card protag"><div class="nm">Blake Logan</div><div class="role">Son &middot; hockey</div><div class="bio">Logan &amp; Grace's son, Wyatt's best friend and eventually something more.</div><span class="bk">LOVE SONG</span></div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div style="text-align:center;margin-top:6px;font-size:12px;color:#9aa5b6;">Blake Logan &amp; Wyatt Graham are the co-leads of <b style="color:var(--gold-2)">Love Song</b></div>
+          <div class="tree-note" data-sp="2">Blake Logan &amp; Wyatt Graham are the co-leads of <b>Love Song</b></div>
         </div>
       </div>
 
       <!-- DI LAURENTIS -->
-      <div class="family-block" style="grid-column:span 1;">
+      <div class="family-block" id="fam-dilaurentis">
         <p class="family-name">The Di Laurentis' <small>Off-Campus &rarr; Briar U &rarr; Campus Diaries</small></p>
         <div class="tree">
           <div class="gen0">Peter Di Laurentis &amp; Lori Heyward</div>
@@ -463,13 +536,13 @@
                   <div data-id="allie" class="card protag"><div class="nm">Allie Hayes</div><div class="role">Aspiring actress</div><div class="bio">Bubbly aspiring actress who becomes Dean's unlikely roommate, then something more.</div><span class="bk">THE SCORE</span></div>
                 </div>
                 <div class="children" style="margin-top:14px;">
-                  <div class="child"><div class="branch"></div><div data-id="beau" class="card gen2"><div class="nm">Beau Di Laurentis</div><div class="role">Son &middot; hockey</div><span class="tbd">No book yet</span></div></div>
-                  <div class="child"><div class="branch"></div><div data-id="ivy" class="card protag gen2"><div class="nm">Ivy Di Laurentis</div><div class="role">Daughter &middot; ballet</div><div class="bio">Dean &amp; Allie's daughter, a ballet dancer paired with AJ Connelly in the next release.</div><span class="bk">BAD IDEA '26</span></div></div>
-                  <div class="child"><div class="branch"></div><div data-id="kate" class="card gen2"><div class="nm">Kate Di Laurentis</div><div class="role">Youngest daughter</div><span class="tbd">No book yet</span></div></div>
+                  <div class="child"><div class="branch"></div><div data-id="beau" data-sp="2" class="card"><div class="nm">Beau Di Laurentis</div><div class="role">Son &middot; hockey</div><span class="tbd">No book yet</span></div></div>
+                  <div class="child"><div class="branch"></div><div data-id="ivy" data-sp="2" class="card protag"><div class="nm">Ivy Di Laurentis</div><div class="role">Daughter &middot; ballet</div><div class="bio">Dean &amp; Allie's daughter, a ballet dancer paired with AJ Connelly in the next release.</div><span class="bk">BAD IDEA '26</span></div></div>
+                  <div class="child"><div class="branch"></div><div data-id="kate" data-sp="2" class="card"><div class="nm">Kate Di Laurentis</div><div class="role">Youngest daughter</div><span class="tbd">No book yet</span></div></div>
                 </div>
               </div>
               <div class="child">
-                <div class="couple-row">
+                <div class="couple-row" data-sp="1">
                   <div data-id="summer" class="card protag"><div class="nm">Summer Heyward-Di Laurentis</div><div class="role">Dean's sister</div><div class="bio">Dean's sharp-tongued younger sister, transferring to Briar with her guard fully up.</div><span class="bk">THE CHASE</span></div>
                   <div class="ring">&#8734;</div>
                   <div data-id="fitzy" class="card protag"><div class="nm">Colin "Fitzy" Fitzgerald</div><div class="role">Hockey player</div><div class="bio">Golden-boy hockey player with a wandering eye, finally meets someone immune to his charm.</div><span class="bk">THE CHASE</span></div>
@@ -477,12 +550,12 @@
               </div>
             </div>
           </div>
-          <div style="text-align:center;margin-top:6px;font-size:12px;color:#9aa5b6;">Ivy is paired with <b style="color:var(--gold-2)">AJ Connelly</b> (Jake &amp; Brenna's son) in the upcoming <i>Bad Idea</i>, Nov 2026</div>
+          <div class="tree-note" data-sp="2">Ivy is paired with <b>AJ Connelly</b> (Jake &amp; Brenna's son) in the upcoming <i>Bad Idea</i>, Nov 2026</div>
         </div>
       </div>
 
       <!-- TUCKER -->
-      <div class="family-block">
+      <div class="family-block" id="fam-tucker">
         <p class="family-name">The Tuckers <small>Off-Campus</small></p>
         <div class="tree">
           <div class="gen0">John Tucker Sr. &amp; Gail Tucker</div>
@@ -494,15 +567,15 @@
           </div>
           <div class="children-wrap">
             <div class="children">
-              <div class="child"><div class="branch"></div><div data-id="jamie" class="card gen2"><div class="nm">Jamie Tucker</div><div class="role">Daughter</div><span class="tbd">No book yet</span></div></div>
-              <div class="child"><div class="branch"></div><div data-id="alexandra" class="card gen2"><div class="nm">Alexandra Tucker</div><div class="role">Daughter</div><span class="tbd">No book yet</span></div></div>
+              <div class="child"><div class="branch"></div><div data-id="jamie" data-sp="1" class="card"><div class="nm">Jamie Tucker</div><div class="role">Daughter</div><span class="tbd">No book yet</span></div></div>
+              <div class="child"><div class="branch"></div><div data-id="alexandra" data-sp="1" class="card"><div class="nm">Alexandra Tucker</div><div class="role">Daughter</div><span class="tbd">No book yet</span></div></div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- CONNELLY (Briar U, not in original wiki family tree but relevant for Bad Idea) -->
-      <div class="family-block">
+      <!-- CONNELLY -->
+      <div class="family-block" id="fam-connelly" data-sp="1">
         <p class="family-name">The Connellys <small>Briar U &rarr; Campus Diaries</small></p>
         <div class="tree">
           <div class="gen0" style="border-color:transparent;">Introduced in Briar U (no parents shown on-page)</div>
@@ -513,10 +586,10 @@
           </div>
           <div class="children-wrap">
             <div class="children">
-              <div class="child"><div class="branch"></div><div data-id="aj" class="card protag gen2"><div class="nm">AJ Connelly</div><div class="role">Son &middot; hockey</div><div class="bio">Jake &amp; Brenna's son, paired with Ivy Di Laurentis in the upcoming <em>Bad Idea</em>.</div><span class="bk">BAD IDEA '26</span></div></div>
+              <div class="child"><div class="branch"></div><div data-id="aj" data-sp="2" class="card protag"><div class="nm">AJ Connelly</div><div class="role">Son &middot; hockey</div><div class="bio">Jake &amp; Brenna's son, paired with Ivy Di Laurentis in the upcoming <em>Bad Idea</em>.</div><span class="bk">BAD IDEA '26</span></div></div>
             </div>
           </div>
-          <div style="text-align:center;margin-top:6px;font-size:12px;color:#9aa5b6;">Brenna Jensen is also Chad Jensen's daughter &mdash; Briar's head hockey coach &mdash; and Summer's best friend</div>
+          <div class="tree-note">Brenna Jensen is also Chad Jensen's daughter &mdash; Briar's head hockey coach &mdash; and Summer's best friend</div>
         </div>
       </div>
 
@@ -524,7 +597,7 @@
   </section>
 
   <!-- ======================= FRIEND GROUPS ======================= -->
-  <section class="view" id="friends">
+  <section class="view" id="friends" role="tabpanel">
     <div class="view-head">
       <h2>Three Friend Groups, One Locker Room</h2>
       <p>Each series centers a different friend circle at Briar University. Many characters cross over &mdash; mentoring, rooming with, or dating into the next crew.</p>
@@ -536,87 +609,92 @@
     </div>
 
     <div class="friend-groups">
-
-      <div class="fg">
+      <div class="fg" id="fg-oc">
         <div class="fg-title"><h3>The Original Four &mdash; Off-Campus</h3><span>Seniors &middot; est. mid-2010s</span></div>
         <p class="fg-note">Four best friends and hockey teammates who anchor the original series, each getting their own book. Their girlfriends form a tight, overlapping friend group of their own.</p>
         <div class="cluster">
-          <div class="bubble hockey">Garrett Graham <small>The Deal</small></div>
-          <div class="bubble hockey">John "Logan" Logan <small>The Mistake</small></div>
-          <div class="bubble hockey">Dean Heyward-Di Laurentis <small>The Score</small></div>
-          <div class="bubble hockey">John Tucker <small>The Goal</small></div>
-          <div class="bubble girls">Hannah Wells</div>
-          <div class="bubble girls">Grace Ivers</div>
-          <div class="bubble girls">Allie Hayes</div>
-          <div class="bubble girls">Sabrina James</div>
+          <div class="bubble hockey" data-id="garrett">Garrett Graham <small>The Deal</small></div>
+          <div class="bubble hockey" data-id="logan">John "Logan" Logan <small>The Mistake</small></div>
+          <div class="bubble hockey" data-id="dean">Dean Heyward-Di Laurentis <small>The Score</small></div>
+          <div class="bubble hockey" data-id="tucker">John Tucker <small>The Goal</small></div>
+          <div class="bubble girls" data-id="hannah">Hannah Wells</div>
+          <div class="bubble girls" data-id="grace">Grace Ivers</div>
+          <div class="bubble girls" data-id="allie">Allie Hayes</div>
+          <div class="bubble girls" data-id="sabrina">Sabrina James</div>
         </div>
-        <div class="link-note"><b>The Legacy</b> reunites all four couples three years after graduation &mdash; a proposal, an elopement, and a surprise pregnancy round out their story.</div>
+        <div class="link-note" data-sp="1"><b>The Legacy</b> reunites all four couples three years after graduation &mdash; a proposal, an elopement, and a surprise pregnancy round out their story.</div>
       </div>
 
-      <div class="fg">
+      <div class="fg" id="fg-bu" data-sp="1">
         <div class="fg-title"><h3>The Next Wave &mdash; Briar U</h3><span>Underclassmen who step up &middot; shortly after Off-Campus</span></div>
         <p class="fg-note">Characters who were minor players or underclassmen in Off-Campus take the lead once the original four graduate. Dean personally mentored Hunter on the ice; Brenna is Summer's best friend.</p>
         <div class="cluster">
-          <div class="bubble hockey">Colin "Fitzy" Fitzgerald <small>The Chase</small></div>
-          <div class="bubble hockey">Jake Connelly <small>The Risk</small></div>
-          <div class="bubble hockey">Hunter Davenport <small>The Play</small></div>
-          <div class="bubble hockey">Conor Edwards <small>The Dare</small></div>
-          <div class="bubble girls">Summer Heyward-Di Laurentis <small>Dean's sister</small></div>
-          <div class="bubble girls">Brenna Jensen <small>Coach's daughter</small></div>
-          <div class="bubble girls">Demi Davis</div>
-          <div class="bubble girls">Taylor Marsh</div>
+          <div class="bubble hockey" data-id="fitzy">Colin "Fitzy" Fitzgerald <small>The Chase</small></div>
+          <div class="bubble hockey" data-id="jakec">Jake Connelly <small>The Risk</small></div>
+          <div class="bubble hockey" data-id="hunter">Hunter Davenport <small>The Play</small></div>
+          <div class="bubble hockey" data-id="conor">Conor Edwards <small>The Dare</small></div>
+          <div class="bubble girls" data-id="summer">Summer Heyward-Di Laurentis <small>Dean's sister</small></div>
+          <div class="bubble girls" data-id="brenna">Brenna Jensen <small>Coach's daughter</small></div>
+          <div class="bubble girls" data-id="demi">Demi Davis</div>
+          <div class="bubble girls" data-id="taylor">Taylor Marsh</div>
         </div>
         <div class="link-note"><b>Crossover:</b> Dean Heyward-Di Laurentis mentored <b>Hunter Davenport</b> as a teammate-turned-captain. <b>Summer</b> is Dean's younger sister; <b>Brenna</b>'s father Chad Jensen coaches the team.</div>
       </div>
 
-      <div class="fg">
+      <div class="fg" id="fg-cd" data-sp="2">
         <div class="fg-title"><h3>The Next Generation &mdash; Campus Diaries</h3><span>Their kids at Briar U &middot; ~20 years later</span></div>
         <p class="fg-note">The children of the original casts grow up together as the new Briar U hockey &amp; social crew, with a few new campus faces joining their orbit.</p>
         <div class="cluster">
-          <div class="bubble nextgen">Gigi Graham <small>Garrett &amp; Hannah's daughter</small></div>
-          <div class="bubble nextgen">Wyatt Graham <small>Garrett &amp; Hannah's son</small></div>
-          <div class="bubble nextgen">Blake Logan <small>Logan &amp; Grace's son</small></div>
-          <div class="bubble nextgen">Beau Di Laurentis <small>Dean &amp; Allie's son</small></div>
-          <div class="bubble nextgen">Ivy Di Laurentis <small>Dean &amp; Allie's daughter</small></div>
-          <div class="bubble nextgen">Kate Di Laurentis <small>Dean &amp; Allie's daughter</small></div>
-          <div class="bubble nextgen">AJ Connelly <small>Jake &amp; Brenna's son</small></div>
-          <div class="bubble hockey">Luke Ryder <small>Gigi's love interest</small></div>
-          <div class="bubble girls">Diana Dixon <small>The Dixon Rule</small></div>
-          <div class="bubble hockey">Shane Lindley <small>The Dixon Rule</small></div>
-          <div class="bubble girls">Charlotte "Charlie" Kingston <small>The Charlie Method</small></div>
-          <div class="bubble hockey">Will Larsen <small>The Charlie Method</small></div>
-          <div class="bubble hockey">Beckett Dunne <small>The Charlie Method</small></div>
+          <div class="bubble nextgen" data-id="gigi">Gigi Graham <small>Garrett &amp; Hannah's daughter</small></div>
+          <div class="bubble nextgen" data-id="wyatt">Wyatt Graham <small>Garrett &amp; Hannah's son</small></div>
+          <div class="bubble nextgen" data-id="blake">Blake Logan <small>Logan &amp; Grace's son</small></div>
+          <div class="bubble nextgen" data-id="beau">Beau Di Laurentis <small>Dean &amp; Allie's son</small></div>
+          <div class="bubble nextgen" data-id="ivy">Ivy Di Laurentis <small>Dean &amp; Allie's daughter</small></div>
+          <div class="bubble nextgen" data-id="kate">Kate Di Laurentis <small>Dean &amp; Allie's daughter</small></div>
+          <div class="bubble nextgen" data-id="aj">AJ Connelly <small>Jake &amp; Brenna's son</small></div>
+          <div class="bubble hockey" data-id="luke">Luke Ryder <small>Gigi's love interest</small></div>
+          <div class="bubble girls" data-id="diana">Diana Dixon <small>The Dixon Rule</small></div>
+          <div class="bubble hockey" data-id="shane">Shane Lindley <small>The Dixon Rule</small></div>
+          <div class="bubble girls" data-id="charlie">Charlotte "Charlie" Kingston <small>The Charlie Method</small></div>
+          <div class="bubble hockey" data-id="will">Will Larsen <small>The Charlie Method</small></div>
+          <div class="bubble hockey" data-id="beckett">Beckett Dunne <small>The Charlie Method</small></div>
         </div>
         <div class="link-note">Will Larsen and Beckett Dunne are best friends &amp; teammates first introduced in <b>The Graham Effect</b>; both end up in a polyamorous relationship with Charlie in <b>The Charlie Method</b>.</div>
       </div>
-
     </div>
   </section>
 
   <!-- ======================= CONNECTIONS MAP ======================= -->
-  <section class="view" id="map">
+  <section class="view" id="map" role="tabpanel">
     <div class="view-head">
       <h2>The Whole Web, One Map</h2>
-      <p>Every named character above, plotted by generation with every connection drawn: family lines, romances, and friend circles. Scroll sideways &mdash; it's wide. Click any node to highlight just its direct connections.</p>
+      <p>Every named character, plotted by generation with every connection drawn. Drag or swipe to move around, and tap anyone to see just their connections.</p>
     </div>
-    <div class="legend" id="map-legend">
-      <span><i class="swatch" style="background:var(--gold-2)"></i> Family (parent&rarr;child / sibling)</span>
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--gold-2)"></i> Family</span>
       <span><i class="swatch" style="background:var(--maroon-2)"></i> Romantic couple</span>
       <span><i class="swatch" style="background:var(--ice)"></i> Friend group</span>
       <span><i class="swatch" style="background:#c58fd6"></i> Poly relationship</span>
       <span><i class="swatch" style="background:#8a95a8"></i> Mentor</span>
       <span><i class="swatch" style="background:repeating-linear-gradient(135deg, #5b5142, #5b5142 3px, #6b6047 3px, #6b6047 6px); border:1px solid var(--line);"></i> Not part of Briar University</span>
     </div>
-    <div class="map-scroll">
-      <div class="map-canvas" id="map-canvas">
-        <svg id="map-svg"></svg>
-      </div>
+    <div class="map-controls">
+      <select id="mpick" aria-label="Jump to a character on the map"></select>
+      <button type="button" id="mclear">Show everyone</button>
     </div>
-    <p style="font-size:12px;color:#8a95a8;max-width:640px;margin:14px 0 0;">Layout is grouped by generation (top: parents &middot; middle: Off-Campus &amp; Briar U &middot; bottom: Campus Diaries) and is illustrative, not to scale.</p>
+    <div class="split">
+      <div class="map-scroll" id="map-scroll">
+        <div class="map-canvas" id="map-canvas">
+          <svg id="map-svg" aria-hidden="true"></svg>
+        </div>
+      </div>
+      <aside class="panel idle" id="mpanel" aria-live="polite"></aside>
+    </div>
+    <p style="font-size:12.5px;color:#8a95a8;max-width:640px;margin:14px 0 0;">Layout is grouped by generation (top: parents &middot; middle: Off-Campus &amp; Briar U &middot; bottom: Campus Diaries) and is illustrative, not to scale.</p>
   </section>
 
   <!-- ======================= BOOK GUIDE ======================= -->
-  <section class="view" id="books">
+  <section class="view" id="books" role="tabpanel">
     <div class="view-head">
       <h2>Every Book, Who It's About</h2>
       <p>All three series in publication order, grouped by generation.</p>
@@ -628,11 +706,11 @@
         <p>The original series. Follows four hockey-playing best friends at Briar University &mdash; each book centers a different couple from the same intertwined friend group.</p>
       </div>
       <div class="book-row">
-        <div class="book"><div class="num">BOOK 1</div><div class="title">The Deal</div><div class="couple">Garrett Graham &amp; Hannah Wells</div><div class="yr">Freshman/Senior year</div></div>
-        <div class="book"><div class="num">BOOK 2</div><div class="title">The Mistake</div><div class="couple">John Logan &amp; Grace Ivers</div><div class="yr">Same era</div></div>
-        <div class="book"><div class="num">BOOK 3</div><div class="title">The Score</div><div class="couple">Dean Heyward-Di Laurentis &amp; Allie Hayes</div><div class="yr">Same era</div></div>
-        <div class="book"><div class="num">BOOK 4</div><div class="title">The Goal</div><div class="couple">John Tucker &amp; Sabrina James</div><div class="yr">Same era</div></div>
-        <div class="book"><div class="num">BOOK 5</div><div class="title">The Legacy</div><div class="couple">All four couples (4 novellas)</div><div class="yr">+3 years post-grad</div></div>
+        <div class="book" id="b-deal"><div class="num">BOOK 1</div><div class="title">The Deal</div><div class="couple">Garrett Graham &amp; Hannah Wells</div><div class="yr">Freshman/Senior year</div><a class="buy" data-buy="The Deal">Find the book</a></div>
+        <div class="book" id="b-mistake"><div class="num">BOOK 2</div><div class="title">The Mistake</div><div class="couple">John Logan &amp; Grace Ivers</div><div class="yr">Same era</div><a class="buy" data-buy="The Mistake">Find the book</a></div>
+        <div class="book" id="b-score"><div class="num">BOOK 3</div><div class="title">The Score</div><div class="couple">Dean Heyward-Di Laurentis &amp; Allie Hayes</div><div class="yr">Same era</div><a class="buy" data-buy="The Score">Find the book</a></div>
+        <div class="book" id="b-goal"><div class="num">BOOK 4</div><div class="title">The Goal</div><div class="couple">John Tucker &amp; Sabrina James</div><div class="yr">Same era</div><a class="buy" data-buy="The Goal">Find the book</a></div>
+        <div class="book" id="b-legacy"><div class="num">BOOK 5</div><div class="title">The Legacy</div><div class="couple">All four couples (4 novellas)</div><div class="yr">+3 years post-grad</div><a class="buy" data-buy="The Legacy">Find the book</a></div>
       </div>
     </div>
 
@@ -642,10 +720,10 @@
         <p>Spin-off following characters who were side characters or underclassmen in Off-Campus, once the original four hockey guys graduate.</p>
       </div>
       <div class="book-row">
-        <div class="book"><div class="num">BOOK 1</div><div class="title">The Chase</div><div class="couple">Colin "Fitzy" Fitzgerald &amp; Summer Heyward-Di Laurentis</div><div class="yr">Shortly after Off-Campus</div></div>
-        <div class="book"><div class="num">BOOK 2</div><div class="title">The Risk</div><div class="couple">Jake Connelly &amp; Brenna Jensen</div><div class="yr">Same era</div></div>
-        <div class="book"><div class="num">BOOK 3</div><div class="title">The Play</div><div class="couple">Hunter Davenport &amp; Demi Davis</div><div class="yr">Same era</div></div>
-        <div class="book"><div class="num">BOOK 4</div><div class="title">The Dare</div><div class="couple">Conor Edwards &amp; Taylor Marsh</div><div class="yr">Same era</div></div>
+        <div class="book" id="b-chase"><div class="num">BOOK 1</div><div class="title">The Chase</div><div class="couple">Colin "Fitzy" Fitzgerald &amp; Summer Heyward-Di Laurentis</div><div class="yr">Shortly after Off-Campus</div><a class="buy" data-buy="The Chase">Find the book</a></div>
+        <div class="book" id="b-risk"><div class="num">BOOK 2</div><div class="title">The Risk</div><div class="couple">Jake Connelly &amp; Brenna Jensen</div><div class="yr">Same era</div><a class="buy" data-buy="The Risk">Find the book</a></div>
+        <div class="book" id="b-play"><div class="num">BOOK 3</div><div class="title">The Play</div><div class="couple">Hunter Davenport &amp; Demi Davis</div><div class="yr">Same era</div><a class="buy" data-buy="The Play">Find the book</a></div>
+        <div class="book" id="b-dare"><div class="num">BOOK 4</div><div class="title">The Dare</div><div class="couple">Conor Edwards &amp; Taylor Marsh</div><div class="yr">Same era</div><a class="buy" data-buy="The Dare">Find the book</a></div>
       </div>
     </div>
 
@@ -655,34 +733,33 @@
         <p>The next generation &mdash; children of the original Off-Campus &amp; Briar U casts, now students (and hockey players) at Briar U themselves.</p>
       </div>
       <div class="book-row">
-        <div class="book gen2"><div class="num">BOOK 1</div><div class="title">The Graham Effect</div><div class="couple">Luke Ryder &amp; Gigi Graham</div><div class="yr">~20 yrs after Off-Campus</div></div>
-        <div class="book gen2"><div class="num">BOOK 2</div><div class="title">The Dixon Rule</div><div class="couple">Shane Lindley &amp; Diana Dixon</div><div class="yr">Same era</div></div>
-        <div class="book gen2"><div class="num">BOOK 3</div><div class="title">The Charlie Method</div><div class="couple">Charlie Kingston, Will Larsen &amp; Beckett Dunne</div><div class="yr">Overlaps The Dixon Rule</div></div>
-        <div class="book gen2"><div class="num">BOOK 4</div><div class="title">Love Song</div><div class="couple">Wyatt Graham &amp; Blake Logan</div><div class="yr">Same era</div></div>
-        <div class="book upcoming gen2"><div class="num">BOOK 5 &middot; UPCOMING</div><div class="title">Bad Idea</div><div class="couple">Ivy Di Laurentis &amp; AJ Connelly</div><div class="yr">Nov 3, 2026</div></div>
+        <div class="book" id="b-graham"><div class="num">BOOK 1</div><div class="title">The Graham Effect</div><div class="couple" data-sp="2">Luke Ryder &amp; Gigi Graham</div><div class="yr">~20 yrs after Off-Campus</div><a class="buy" data-buy="The Graham Effect">Find the book</a></div>
+        <div class="book" id="b-dixon"><div class="num">BOOK 2</div><div class="title">The Dixon Rule</div><div class="couple">Shane Lindley &amp; Diana Dixon</div><div class="yr">Same era</div><a class="buy" data-buy="The Dixon Rule">Find the book</a></div>
+        <div class="book" id="b-charlie"><div class="num">BOOK 3</div><div class="title">The Charlie Method</div><div class="couple" data-sp="2">Charlie Kingston, Will Larsen &amp; Beckett Dunne</div><div class="yr">Overlaps The Dixon Rule</div><a class="buy" data-buy="The Charlie Method">Find the book</a></div>
+        <div class="book" id="b-love"><div class="num">BOOK 4</div><div class="title">Love Song</div><div class="couple" data-sp="2">Wyatt Graham &amp; Blake Logan</div><div class="yr">Same era</div><a class="buy" data-buy="Love Song">Find the book</a></div>
+        <div class="book upcoming" id="b-bad"><div class="num">BOOK 5 &middot; UPCOMING</div><div class="title">Bad Idea</div><div class="couple" data-sp="2">Ivy Di Laurentis &amp; AJ Connelly</div><div class="yr">Nov 3, 2026</div><a class="buy" data-buy="Bad Idea">Find the book</a></div>
       </div>
     </div>
   </section>
 
   <!-- ======================= TIMELINE ======================= -->
-  <section class="view" id="timeline">
+  <section class="view" id="timeline" role="tabpanel">
     <div class="view-head">
       <h2>Reading &amp; In-Universe Timeline</h2>
       <p>Recommended order: Off-Campus &rarr; Briar U &rarr; Campus Diaries, which also mirrors the in-universe generations.</p>
     </div>
 
     <div class="timeline-wrap">
-
       <div class="tl-era">
         <div class="tl-dot"></div>
         <h3>Gen 1 &middot; Off-Campus</h3>
         <div class="when">College years &middot; first published 2015</div>
         <div class="tl-books">
-          <div class="tl-book"><span class="idx">1</span><div class="info"><b>The Deal</b> &mdash; Garrett &amp; Hannah<span>Introduces the whole Briar U world</span></div></div>
+          <div class="tl-book"><span class="idx">1</span><div class="info"><b>The Deal</b> &mdash; Garrett &amp; Hannah<span class="n">Introduces the whole Briar U world</span></div></div>
           <div class="tl-book"><span class="idx">2</span><div class="info"><b>The Mistake</b> &mdash; Logan &amp; Grace</div></div>
           <div class="tl-book"><span class="idx">3</span><div class="info"><b>The Score</b> &mdash; Dean &amp; Allie</div></div>
           <div class="tl-book"><span class="idx">4</span><div class="info"><b>The Goal</b> &mdash; Tucker &amp; Sabrina</div></div>
-          <div class="tl-book"><span class="idx">5</span><div class="info"><b>The Legacy</b> &mdash; all four couples<span>Set 3 years after graduation</span></div></div>
+          <div class="tl-book"><span class="idx">5</span><div class="info"><b>The Legacy</b> &mdash; all four couples<span class="n">Set 3 years after graduation</span></div></div>
         </div>
       </div>
 
@@ -691,53 +768,93 @@
         <h3>Gen 1.5 &middot; Briar U</h3>
         <div class="when">Shortly after Off-Campus, once the original four graduate</div>
         <div class="tl-books">
-          <div class="tl-book"><span class="idx">1</span><div class="info"><b>The Chase</b> &mdash; Fitzy &amp; Summer<span>Summer is Dean's younger sister</span></div></div>
+          <div class="tl-book"><span class="idx">1</span><div class="info"><b>The Chase</b> &mdash; Fitzy &amp; Summer<span class="n" data-sp="1">Summer is Dean's younger sister</span></div></div>
           <div class="tl-book"><span class="idx">2</span><div class="info"><b>The Risk</b> &mdash; Jake Connelly &amp; Brenna</div></div>
-          <div class="tl-book"><span class="idx">3</span><div class="info"><b>The Play</b> &mdash; Hunter &amp; Demi<span>Hunter was mentored by Dean</span></div></div>
+          <div class="tl-book"><span class="idx">3</span><div class="info"><b>The Play</b> &mdash; Hunter &amp; Demi<span class="n" data-sp="1">Hunter was mentored by Dean</span></div></div>
           <div class="tl-book"><span class="idx">4</span><div class="info"><b>The Dare</b> &mdash; Conor &amp; Taylor</div></div>
         </div>
       </div>
 
-      <div class="tl-era gen2">
+      <div class="tl-era">
         <div class="tl-dot" style="background:var(--ice);"></div>
         <h3>Gen 2 &middot; Campus Diaries</h3>
         <div class="when">~20 years later &mdash; the kids' turn at Briar U</div>
         <div class="tl-books">
-          <div class="tl-book"><span class="idx">1</span><div class="info"><b>The Graham Effect</b> &mdash; Luke Ryder &amp; Gigi Graham<span>Gigi is Garrett &amp; Hannah's daughter</span></div></div>
+          <div class="tl-book"><span class="idx">1</span><div class="info"><b>The Graham Effect</b> <span data-sp="2">&mdash; Luke Ryder &amp; Gigi Graham</span><span class="n" data-sp="2">Gigi is Garrett &amp; Hannah's daughter</span></div></div>
           <div class="tl-book"><span class="idx">2</span><div class="info"><b>The Dixon Rule</b> &mdash; Shane &amp; Diana</div></div>
-          <div class="tl-book"><span class="idx">3</span><div class="info"><b>The Charlie Method</b> &mdash; Charlie, Will &amp; Beckett<span>Overlaps events of The Dixon Rule</span></div></div>
-          <div class="tl-book"><span class="idx">4</span><div class="info"><b>Love Song</b> &mdash; Wyatt Graham &amp; Blake Logan<span>Sons of Garrett/Hannah and Logan/Grace</span></div></div>
-          <div class="tl-book"><span class="idx">5</span><div class="info"><b>Bad Idea</b> &mdash; Ivy Di Laurentis &amp; AJ Connelly<span>Upcoming &middot; Nov 3, 2026</span></div></div>
+          <div class="tl-book"><span class="idx">3</span><div class="info"><b>The Charlie Method</b> <span data-sp="2">&mdash; Charlie, Will &amp; Beckett</span><span class="n">Overlaps events of The Dixon Rule</span></div></div>
+          <div class="tl-book"><span class="idx">4</span><div class="info"><b>Love Song</b> <span data-sp="2">&mdash; Wyatt Graham &amp; Blake Logan</span><span class="n" data-sp="2">Sons of Garrett/Hannah and Logan/Grace</span></div></div>
+          <div class="tl-book"><span class="idx">5</span><div class="info"><b>Bad Idea</b> <span data-sp="2">&mdash; Ivy Di Laurentis &amp; AJ Connelly</span><span class="n">Upcoming &middot; Nov 3, 2026</span></div></div>
         </div>
       </div>
-
     </div>
   </section>
 
+</div>
 </main>
 
-<footer>Fan-made reference, built from published book synopses &amp; the Off-Campus Wiki family tree &middot; not affiliated with Elle Kennedy or her publishers.</footer>
+<footer>
+  <div class="wrap">
+    <div class="foot-actions">
+      <a class="kofi" href="https://ko-fi.com/readersatlas" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 4v1.5M11.5 3v2.5"/></svg>
+        Buy me a coffee
+      </a>
+      <a class="home-link" href="https://readersatlas.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        More guides at The Reader's Atlas
+      </a>
+    </div>
+    <p>Unofficial, fan-made reference built from published book synopses &amp; the Off-Campus Wiki family tree. Not affiliated with Elle Kennedy or her publishers; all characters and worlds belong to their creators.</p>
+    <p>Some book links may be affiliate links, which means I may earn a small commission at no extra cost to you.</p>
+    <p>Part of <a href="https://readersatlas.com" style="color:var(--gold-2)">The Reader's Atlas</a> &middot; <a href="https://www.instagram.com/readers.atlas" style="color:var(--gold-2)" target="_blank" rel="noopener">@readers.atlas</a></p>
+  </div>
+</footer>
+
+<!-- ======================= SPOILER DIALOG ======================= -->
+<dialog class="sp-dialog" id="sp-dialog" aria-labelledby="sp-title">
+  <div class="d-in">
+    <div class="eyebrow" style="display:block">Spoiler warning</div>
+    <h2 id="sp-title">How far have you read?</h2>
+    <p>This guide covers three series and twenty years of the Briar U world. I'll blur anything from books you haven't reached yet. You can tap a blurred item to peek, or change this any time with the eye button at the top.</p>
+    <div class="sp-opts" id="sp-opts">
+      <button type="button" data-level="0"><b>I'm reading Off-Campus</b><span>Hide Briar U and Campus Diaries</span></button>
+      <button type="button" data-level="1"><b>I've finished Off-Campus</b><span>Show Briar U, hide Campus Diaries</span></button>
+      <button type="button" data-level="2"><b>I'm on Campus Diaries, or don't mind spoilers</b><span>Show everything</span></button>
+    </div>
+    <p class="fine">Your choice is remembered on this device.</p>
+  </div>
+</dialog>
 
 <script>
-  const buttons = document.querySelectorAll('nav.tabs button');
-  const views = document.querySelectorAll('section.view');
-  buttons.forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      buttons.forEach(b=>b.classList.remove('active'));
-      views.forEach(v=>v.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.view).classList.add('active');
-      window.scrollTo({top:0, behavior:'smooth'});
-      if(btn.dataset.view === 'map'){ renderMap(); }
-      if(typeof performSearch === 'function'){ performSearch(); }
-    });
-  });
-</script>
+/* ================================================================
+   AFFILIATE SETTINGS — once Amazon approves you, paste your tracking
+   ID between the quotes (e.g. "readersatlas-22"). Every "Find the
+   book" button updates automatically.
+   ================================================================ */
+const AMAZON_TAG = "";
+const AMAZON_STORE = "https://www.amazon.com.au/s";
 
-<script>
-/* ===================== CONNECTIONS MAP DATA ===================== */
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+
+/* ===================== BOOK LINKS ===================== */
+$$('.buy[data-buy]').forEach(a => {
+  const q = encodeURIComponent('Elle Kennedy ' + a.dataset.buy);
+  a.href = AMAZON_STORE + '?k=' + q + (AMAZON_TAG ? '&tag=' + encodeURIComponent(AMAZON_TAG) : '');
+  a.target = '_blank';
+  a.rel = 'noopener' + (AMAZON_TAG ? ' sponsored' : '');
+});
+
+/* ===================== MAP DATA ===================== */
+// sp: 1 = revealed once Off-Campus is finished (Briar U era); 2 = Campus Diaries era
+const BU_IDS = ['fitzy','jakec','hunter','conor','summer','brenna','demi','taylor'];
 const nodes = [
-  // ---- Gen 0 (parents) — not Briar University ----
   {id:'g0g', x:150,  y:40,  name:'Phil & Mrs. Graham', gen:'gen0', notBriar:true},
   {id:'g0l', x:430,  y:40,  name:'Ward & Jean Logan', gen:'gen0', notBriar:true},
   {id:'g0d', x:890,  y:40,  name:'Peter Di Laurentis & Lori Heyward', gen:'gen0', notBriar:true},
@@ -745,7 +862,6 @@ const nodes = [
   {id:'jeffrey', x:290, y:150, name:'Jeffrey Logan', gen:'gen0', notBriar:true},
   {id:'nick',    x:990, y:150, name:'Nick Heyward-Di Laurentis', gen:'gen0', notBriar:true},
 
-  // ---- Gen 1 guys: Off-Campus + Briar U ----
   {id:'garrett', x:150,  y:270, name:'Garrett Graham', book:'The Deal', gen:'gen1'},
   {id:'logan',   x:430,  y:270, name:'John "Logan" Logan', book:'The Mistake', gen:'gen1'},
   {id:'dean',    x:710,  y:270, name:'Dean Heyward-Di Laurentis', book:'The Score', gen:'gen1'},
@@ -755,7 +871,6 @@ const nodes = [
   {id:'hunter',  x:1830, y:270, name:'Hunter Davenport', book:'The Play', gen:'gen1'},
   {id:'conor',   x:2110, y:270, name:'Conor Edwards', book:'The Dare', gen:'gen1'},
 
-  // ---- Gen 1 girls ----
   {id:'hannah',  x:150,  y:420, name:'Hannah Wells', book:'The Deal', gen:'gen1'},
   {id:'grace',   x:430,  y:420, name:'Grace Ivers', book:'The Mistake', gen:'gen1'},
   {id:'allie',   x:710,  y:420, name:'Allie Hayes', book:'The Score', gen:'gen1'},
@@ -765,189 +880,397 @@ const nodes = [
   {id:'demi',    x:1830, y:420, name:'Demi Davis', book:'The Play', gen:'gen1'},
   {id:'taylor',  x:2110, y:420, name:'Taylor Marsh', book:'The Dare', gen:'gen1'},
 
-  // ---- Gen 2: Campus Diaries kids ----
   {id:'wyatt',  x:100,  y:660, name:'Wyatt Graham', book:'Love Song', gen:'gen2'},
   {id:'gigi',   x:230,  y:660, name:'Gigi Graham', book:'Graham Effect', gen:'gen2'},
   {id:'luke',   x:360,  y:660, name:'Luke Ryder', book:'Graham Effect', gen:'gen2'},
   {id:'blake',  x:560,  y:660, name:'Blake Logan', book:'Love Song', gen:'gen2'},
-  {id:'beau',   x:760,  y:660, name:'Beau Di Laurentis', book:'—', gen:'gen2'},
+  {id:'beau',   x:760,  y:660, name:'Beau Di Laurentis', gen:'gen2'},
   {id:'ivy',    x:900,  y:660, name:'Ivy Di Laurentis', book:"Bad Idea '26", gen:'gen2'},
-  {id:'kate',   x:1040, y:660, name:'Kate Di Laurentis', book:'—', gen:'gen2'},
+  {id:'kate',   x:1040, y:660, name:'Kate Di Laurentis', gen:'gen2'},
   {id:'aj',     x:1550, y:660, name:'AJ Connelly', book:"Bad Idea '26", gen:'gen2'},
-  {id:'jamie',  x:1720, y:660, name:'Jamie Tucker', gen:'gen2', notBriar:true},
-  {id:'alexandra', x:1720, y:770, name:'Alexandra Tucker', gen:'gen2', notBriar:true},
+  {id:'jamie',  x:1720, y:660, name:'Jamie Tucker', gen:'gen2', notBriar:true, sp:1},
+  {id:'alexandra', x:1720, y:770, name:'Alexandra Tucker', gen:'gen2', notBriar:true, sp:1},
 
-  // ---- Gen 2: new campus faces ----
   {id:'diana',   x:1780, y:850, name:'Diana Dixon', book:'Dixon Rule', gen:'gen2'},
   {id:'shane',   x:1910, y:850, name:'Shane Lindley', book:'Dixon Rule', gen:'gen2'},
   {id:'charlie', x:2060, y:850, name:'Charlotte "Charlie" Kingston', book:'Charlie Method', gen:'gen2'},
   {id:'will',    x:2200, y:750, name:'Will Larsen', book:'Charlie Method', gen:'gen2'},
   {id:'beckett', x:2200, y:930, name:'Beckett Dunne', book:'Charlie Method', gen:'gen2'},
 ];
+nodes.forEach(n => {
+  if(n.sp === undefined) n.sp = n.gen === 'gen2' ? 2 : (BU_IDS.includes(n.id) ? 1 : 0);
+});
+const byId = Object.fromEntries(nodes.map(n => [n.id, n]));
 
 const COLORS = { family:'#e4c877', romance:'#9c3d3d', friend:'#8fb8c9', poly:'#c58fd6', mentor:'#8a95a8' };
+const TYPE_LABEL = { family:'Family', romance:'Partner', friend:'Friends', poly:'Poly relationship', mentor:'Mentor' };
 
 const edges = [
-  // family
   ['g0g','garrett','family'], ['g0l','logan','family'], ['g0d','dean','family'], ['g0d','summer','family'], ['g0t','tucker','family'],
   ['garrett','wyatt','family'], ['garrett','gigi','family'], ['logan','blake','family'],
   ['dean','beau','family'], ['dean','ivy','family'], ['dean','kate','family'], ['jakec','aj','family'],
   ['g0l','jeffrey','family'], ['g0d','nick','family'], ['tucker','jamie','family'], ['tucker','alexandra','family'],
-  // romance
   ['garrett','hannah','romance'], ['logan','grace','romance'], ['dean','allie','romance'], ['tucker','sabrina','romance'],
   ['fitzy','summer','romance'], ['jakec','brenna','romance'], ['hunter','demi','romance'], ['conor','taylor','romance'],
   ['gigi','luke','romance'], ['diana','shane','romance'],
-  // friend — OG guys mesh
   ['garrett','logan','friend'], ['garrett','dean','friend'], ['garrett','tucker','friend'],
   ['logan','dean','friend'], ['logan','tucker','friend'], ['dean','tucker','friend'],
-  // friend — OG girls mesh
   ['hannah','grace','friend'], ['hannah','allie','friend'], ['hannah','sabrina','friend'],
   ['grace','allie','friend'], ['grace','sabrina','friend'], ['allie','sabrina','friend'],
-  // friend — Briar U guys mesh
   ['fitzy','jakec','friend'], ['fitzy','hunter','friend'], ['fitzy','conor','friend'],
   ['jakec','hunter','friend'], ['jakec','conor','friend'], ['hunter','conor','friend'],
-  // friend — Briar U girls mesh
   ['summer','brenna','friend'], ['summer','demi','friend'], ['summer','taylor','friend'],
   ['brenna','demi','friend'], ['brenna','taylor','friend'], ['demi','taylor','friend'],
-  // friend — next-gen chain
   ['wyatt','gigi','friend'], ['gigi','blake','friend'], ['blake','beau','friend'],
   ['beau','ivy','friend'], ['ivy','kate','friend'], ['kate','aj','friend'],
-  // friend — new faces
   ['luke','will','friend'], ['luke','beckett','friend'], ['will','beckett','friend'],
-  // mentor
   ['dean','hunter','mentor'],
-  // poly
   ['charlie','will','poly'], ['charlie','beckett','poly'],
 ];
+const edgeSp = ([a,b]) => Math.max(byId[a]?.sp || 0, byId[b]?.sp || 0);
 
-let mapBuilt = false;
-function renderMap(){
-  if(mapBuilt) return;
-  mapBuilt = true;
-  const canvas = document.getElementById('map-canvas');
-  const svg = document.getElementById('map-svg');
-  svg.setAttribute('viewBox','0 0 2260 980');
+/* ===================== SPOILERS ===================== */
+const LEVEL_LABEL = [
+  'Reading Off-Campus · Briar U & Campus Diaries hidden',
+  'Finished Off-Campus · Campus Diaries hidden',
+  'Showing everything'
+];
+let spLevel = store.get('bu-spoiler', null);
+const revealed = new Set();   // things the reader tapped to peek at this visit
 
-  const byId = {};
-  nodes.forEach(n => byId[n.id] = n);
+function isHidden(sp){ return Number(sp || 0) > (spLevel === null ? 0 : spLevel); }
 
-  // draw edges
-  edges.forEach(([a,b,type])=>{
-    const na = byId[a], nb = byId[b];
-    if(!na || !nb) return;
-    const line = document.createElementNS('http://www.w3.org/2000/svg','line');
-    line.setAttribute('x1', na.x); line.setAttribute('y1', na.y);
-    line.setAttribute('x2', nb.x); line.setAttribute('y2', nb.y);
-    line.setAttribute('stroke', COLORS[type]);
-    line.setAttribute('stroke-width', type==='romance' ? 2.4 : type==='family' ? 2.2 : 1.4);
-    if(type==='friend' || type==='mentor' || type==='poly'){ line.setAttribute('stroke-dasharray','5,5'); }
-    line.classList.add('edge');
-    line.dataset.a = a; line.dataset.b = b;
-    svg.appendChild(line);
+function applySpoilers(){
+  $$('[data-sp]').forEach(el => {
+    const key = el.dataset.spKey || (el.dataset.spKey = 'k' + Math.random().toString(36).slice(2));
+    el.classList.toggle('sp-hidden', isHidden(el.dataset.sp) && !revealed.has(key));
   });
-
-  // draw nodes
-  nodes.forEach(n=>{
-    const div = document.createElement('div');
-    div.className = 'node ' + n.gen + (n.notBriar ? ' notbriar' : '');
-    div.style.left = n.x + 'px';
-    div.style.top = n.y + 'px';
-    div.dataset.id = n.id;
-    let inner = `<div class="n-name">${n.name}</div>`;
-    if(n.book && n.book !== '—'){ inner += `<div class="n-book">${n.book}</div>`; }
-    if(n.notBriar){ inner += `<div class="n-flag">Not Briar U</div>`; }
-    div.innerHTML = inner;
-    div.addEventListener('click', ()=> focusNode(n.id));
-    canvas.appendChild(div);
-  });
-
-  canvas.addEventListener('click', (e)=>{
-    if(e.target === canvas || e.target === svg){ clearFocus(); }
-  });
+  const lvl = spLevel === null ? 0 : spLevel;
+  $('#sp-strip').innerHTML = lvl === 2
+    ? `<span>Spoilers: <b>${LEVEL_LABEL[2]}</b></span><button type="button" data-open-sp>Change</button>`
+    : `<span>Spoilers: <b>${LEVEL_LABEL[lvl]}</b>. Blurred items are from books you haven't reached &mdash; tap one to peek.</span><button type="button" data-open-sp>Change</button>`;
+  $$('#sp-opts button').forEach(b => b.classList.toggle('cur', Number(b.dataset.level) === lvl));
+  if(mapBuilt){ refreshMapSpoilers(); renderPanel(); }
+  buildPicker();
 }
 
-function clearFocus(){
-  document.querySelectorAll('.node').forEach(el=> el.classList.remove('dim','lit'));
-  document.querySelectorAll('.edge').forEach(el=> el.classList.remove('dim','lit'));
+// Tap a blurred item to peek at it (capture phase so it doesn't also trigger the item's own action)
+document.addEventListener('click', e => {
+  const el = e.target.closest('.sp-hidden');
+  if(!el) return;
+  e.preventDefault(); e.stopPropagation();
+  revealed.add(el.dataset.spKey);
+  el.classList.remove('sp-hidden');
+  el.querySelectorAll('.sp-hidden').forEach(c => { revealed.add(c.dataset.spKey); c.classList.remove('sp-hidden'); });
+}, true);
+
+const dlg = $('#sp-dialog');
+function openSpoilers(){
+  if(typeof dlg.showModal === 'function'){ dlg.showModal(); }
+  else { dlg.setAttribute('open',''); }
+}
+function closeSpoilers(){ if(dlg.open){ typeof dlg.close === 'function' ? dlg.close() : dlg.removeAttribute('open'); } }
+$('#sp-open').addEventListener('click', openSpoilers);
+document.addEventListener('click', e => { if(e.target.closest('[data-open-sp]')) openSpoilers(); });
+$('#sp-opts').addEventListener('click', e => {
+  const b = e.target.closest('[data-level]'); if(!b) return;
+  spLevel = Number(b.dataset.level); store.set('bu-spoiler', spLevel);
+  revealed.clear(); applySpoilers(); closeSpoilers();
+});
+dlg.addEventListener('cancel', () => { if(spLevel === null){ spLevel = 0; store.set('bu-spoiler', 0); applySpoilers(); } });
+
+/* ===================== TABS ===================== */
+const TABS = [['families','Family Trees','Families'],['friends','Friend Groups','Friends'],['map','Connections Map','Map'],['books','Book Guide','Books'],['timeline','Timeline','Timeline']];
+const TICON = {
+  families:'<circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5V12M5 16.5V12h14v4.5"/>',
+  friends:'<circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9" r="2.6"/><path d="M3 20c.8-3.5 3.2-5.5 6-5.5s5.2 2 6 5.5M15 14.6c2.6-.3 5 1.4 5.8 4.4"/>',
+  map:'<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="8" r="2.5"/><circle cx="9" cy="18" r="2.5"/><path d="M8.5 6.2 15.5 7.6M6.6 8.4 8.4 15.6M16.6 10.1 10.6 16.2"/>',
+  books:'<path d="M4 5.5C6.5 4 9.5 4 12 5.5v14C9.5 18 6.5 18 4 19.5z"/><path d="M12 5.5C14.5 4 17.5 4 20 5.5v14c-2.5-1.5-5.5-1.5-8 0"/>',
+  timeline:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'
+};
+let current = store.get('bu-tab', 'families');
+if(location.hash && TABS.some(t => t[0] === location.hash.slice(1))) current = location.hash.slice(1);
+if(!TABS.some(t => t[0] === current)) current = 'families';
+
+function renderTabs(){
+  $('#tabs').innerHTML = TABS.map(([k,l,s]) =>
+    `<button role="tab" type="button" aria-selected="${k===current}" aria-controls="${k}" data-tab="${k}" aria-label="${l}">` +
+    `<svg class="tabicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${TICON[k]}</svg>` +
+    `<span class="tl">${l}</span><span class="ts">${s}</span></button>`).join('');
+}
+function show(tab, after){
+  current = tab; store.set('bu-tab', tab);
+  renderTabs();
+  $$('section.view').forEach(v => v.classList.toggle('active', v.id === tab));
+  if(tab === 'map') renderMap(); else hidePanel();
+  try{ history.replaceState(null, '', '#' + tab); }catch(e){}
+  window.scrollTo({top:0});
+  if(after) requestAnimationFrame(() => requestAnimationFrame(after));
+}
+$('#tabs').addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if(b) show(b.dataset.tab); });
+
+function flash(el){
+  if(!el) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  el.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'center'});
+  el.classList.add('flash');
+  setTimeout(() => el.classList.remove('flash'), 2200);
 }
 
-function focusNode(id){
-  const connected = new Set([id]);
-  const litEdges = [];
-  edges.forEach(([a,b])=>{
-    if(a===id) { connected.add(b); }
-    if(b===id) { connected.add(a); }
-  });
-  document.querySelectorAll('.node').forEach(el=>{
-    const nid = el.dataset.id;
-    el.classList.remove('dim','lit');
-    if(!nid) return;
-    if(connected.has(nid)){ el.classList.add('lit'); }
-    else { el.classList.add('dim'); }
-  });
-  document.querySelectorAll('.edge').forEach(el=>{
-    el.classList.remove('dim','lit');
-    if(el.dataset.a === id || el.dataset.b === id){ el.classList.add('lit'); }
-    else { el.classList.add('dim'); }
-  });
-}
-
-/* ===================== FAMILY TREE CLICK-TO-FOCUS ===================== */
+/* ===================== FAMILY TREE FOCUS ===================== */
 let familyFocused = null;
-
 function familyFocus(id){
   const connected = new Set([id]);
-  edges.forEach(([a,b])=>{
-    if(a===id) connected.add(b);
-    if(b===id) connected.add(a);
-  });
-  document.querySelectorAll('.family-block .card[data-id]').forEach(el=>{
-    const cid = el.dataset.id;
+  edges.forEach(([a,b,t]) => { if(t === 'friend') return; if(a===id) connected.add(b); if(b===id) connected.add(a); });
+  $$('.family-block .card[data-id]').forEach(el => {
     el.classList.remove('dim','lit');
-    if(connected.has(cid)){ el.classList.add('lit'); }
-    else { el.classList.add('dim'); }
+    el.classList.add(connected.has(el.dataset.id) ? 'lit' : 'dim');
   });
 }
-function clearFamilyFocus(){
-  document.querySelectorAll('.family-block .card[data-id]').forEach(el=> el.classList.remove('dim','lit'));
-  familyFocused = null;
-}
-document.querySelectorAll('.family-block .card[data-id]').forEach(card=>{
-  card.addEventListener('click', (e)=>{
+function clearFamilyFocus(){ $$('.family-block .card[data-id]').forEach(el => el.classList.remove('dim','lit')); familyFocused = null; }
+$$('.family-block .card[data-id]').forEach(card => {
+  card.addEventListener('click', e => {
     e.stopPropagation();
     const id = card.dataset.id;
-    if(familyFocused === id){ clearFamilyFocus(); }
-    else { familyFocus(id); familyFocused = id; }
+    if(familyFocused === id) clearFamilyFocus(); else { familyFocus(id); familyFocused = id; }
   });
 });
-document.getElementById('families').addEventListener('click', clearFamilyFocus);
+$('#families').addEventListener('click', clearFamilyFocus);
 
-/* ===================== GLOBAL SEARCH ===================== */
-const searchInput = document.getElementById('global-search');
-function performSearch(){
-  const q = searchInput.value.trim().toLowerCase();
-  const targets = document.querySelectorAll('.family-block .card[data-id], .friend-groups .bubble, .node');
-  if(!q){
-    targets.forEach(el=> el.classList.remove('dim','lit'));
+/* ===================== CONNECTIONS MAP ===================== */
+let mapBuilt = false, mapFocus = null;
+const narrow = () => matchMedia('(max-width:700px)').matches;
+
+function renderMap(){
+  if(!mapBuilt){
+    mapBuilt = true;
+    const canvas = $('#map-canvas'), svg = $('#map-svg');
+    svg.setAttribute('viewBox','0 0 2260 980');
+    edges.forEach(e => {
+      const [a,b,type] = e, na = byId[a], nb = byId[b];
+      if(!na || !nb) return;
+      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1', na.x); line.setAttribute('y1', na.y);
+      line.setAttribute('x2', nb.x); line.setAttribute('y2', nb.y);
+      line.setAttribute('stroke', COLORS[type]);
+      line.setAttribute('stroke-width', type==='romance' ? 2.4 : type==='family' ? 2.2 : 1.4);
+      if(type==='friend' || type==='mentor' || type==='poly') line.setAttribute('stroke-dasharray','5,5');
+      line.classList.add('edge');
+      line.dataset.a = a; line.dataset.b = b;
+      line.dataset.esp = edgeSp(e);
+      svg.appendChild(line);
+    });
+    nodes.forEach(n => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'node ' + n.gen + (n.notBriar ? ' notbriar' : '');
+      btn.style.left = n.x + 'px'; btn.style.top = n.y + 'px';
+      btn.dataset.id = n.id;
+      if(n.sp) btn.dataset.sp = n.sp;
+      let inner = `<div class="n-name">${esc(n.name)}</div>`;
+      if(n.book) inner += `<div class="n-book">${esc(n.book)}</div>`;
+      if(n.notBriar) inner += `<div class="n-flag">Not Briar U</div>`;
+      btn.innerHTML = inner;
+      btn.addEventListener('click', () => focusNode(mapFocus === n.id ? null : n.id));
+      canvas.appendChild(btn);
+    });
+    canvas.addEventListener('click', e => { if(e.target === canvas || e.target === svg) focusNode(null); });
+    applySpoilers();
+    enableDragPan();
+  }
+  if(mapFocus) { focusNode(mapFocus); centerOn(mapFocus); }
+  else if(!narrow()) { renderPanel(); }
+}
+
+function refreshMapSpoilers(){
+  $$('#map-svg line').forEach(l => l.classList.toggle('sp-hidden', isHidden(l.dataset.esp) && !isRevealedEdge(l)));
+}
+function nodeVisible(id){
+  const el = document.querySelector(`.node[data-id="${id}"]`);
+  return !isHidden(byId[id]?.sp) || (el && !el.classList.contains('sp-hidden'));
+}
+function isRevealedEdge(l){ return nodeVisible(l.dataset.a) && nodeVisible(l.dataset.b); }
+
+function focusNode(id){
+  mapFocus = id;
+  const connected = new Set(id ? [id] : []);
+  if(id) edges.forEach(([a,b]) => { if(a===id) connected.add(b); if(b===id) connected.add(a); });
+  $$('.node').forEach(el => {
+    el.classList.remove('dim','lit','focus');
+    if(!id) return;
+    if(el.dataset.id === id) el.classList.add('focus');
+    else el.classList.add(connected.has(el.dataset.id) ? 'lit' : 'dim');
+  });
+  $$('.edge').forEach(el => {
+    el.classList.remove('dim','lit');
+    if(!id) return;
+    el.classList.add(el.dataset.a === id || el.dataset.b === id ? 'lit' : 'dim');
+  });
+  refreshMapSpoilers();
+  $('#mpick').value = id || '';
+  renderPanel();
+}
+
+function centerOn(id){
+  const n = byId[id], box = $('#map-scroll');
+  if(!n || !box) return;
+  box.scrollTo({ left: n.x - box.clientWidth/2, top: n.y - box.clientHeight/2, behavior: 'smooth' });
+}
+
+function renderPanel(){
+  const panel = $('#mpanel');
+  if(!mapFocus){
+    panel.classList.toggle('idle', narrow());
+    panel.innerHTML = `<p class="p-eyebrow">No one selected</p><p class="p-empty">Tap a name on the map, or choose one from the list above, to see who they're connected to.</p>`;
     return;
   }
-  targets.forEach(el=>{
-    const text = el.textContent.toLowerCase();
-    el.classList.remove('dim','lit');
-    if(text.includes(q)){ el.classList.add('lit'); }
-    else { el.classList.add('dim'); }
+  const n = byId[mapFocus];
+  panel.classList.remove('idle');
+  if(!nodeVisible(n.id)){
+    panel.innerHTML = `<button class="sheet-close" type="button" data-close>Close</button><p class="p-eyebrow">Spoiler</p><p class="p-empty">This character is from a book you haven't reached yet. Tap their name on the map to peek.</p>`;
+    return;
+  }
+  const groups = {};
+  edges.forEach(([a,b,t]) => {
+    if(a !== n.id && b !== n.id) return;
+    const other = a === n.id ? b : a;
+    (groups[t] = groups[t] || []).push(other);
   });
+  const order = ['romance','poly','family','mentor','friend'];
+  const list = order.filter(t => groups[t]).map(t => `
+    <div class="p-group"><h4><i class="swatch" style="background:${COLORS[t]}"></i>${TYPE_LABEL[t]}</h4><ul>${
+      groups[t].map(o => nodeVisible(o)
+        ? `<li><button type="button" data-mf="${o}">${esc(byId[o].name)}</button></li>`
+        : `<li><span class="hid">Hidden spoiler</span></li>`).join('')
+    }</ul></div>`).join('');
+  panel.innerHTML = `
+    <button class="sheet-close" type="button" data-close>Close</button>
+    <p class="p-eyebrow">${n.gen === 'gen0' ? 'Parents & relatives' : n.gen === 'gen2' ? 'Campus Diaries era' : 'Off-Campus & Briar U era'}</p>
+    <h3>${esc(n.name)}</h3>
+    <div class="p-book">${n.book ? 'Main character in <b>' + esc(n.book) + '</b>' : 'No book of their own (yet)'}${n.notBriar ? ' &middot; Not a Briar U student' : ''}</div>
+    ${list || '<p class="p-empty">No connections drawn yet.</p>'}`;
 }
-searchInput.addEventListener('input', performSearch);
-searchInput.addEventListener('keydown', (e)=>{
-  if(e.key === 'Escape'){ searchInput.value=''; performSearch(); searchInput.blur(); }
+$('#mpanel').addEventListener('click', e => {
+  if(e.target.closest('[data-close]')) return focusNode(null);
+  const b = e.target.closest('[data-mf]');
+  if(b){ focusNode(b.dataset.mf); centerOn(b.dataset.mf); }
 });
+function hidePanel(){ const p = $('#mpanel'); if(p && narrow()) p.classList.add('idle'); }
 
-/* ===================== SPOILER TOGGLE ===================== */
-document.getElementById('spoiler-toggle').addEventListener('change', (e)=>{
-  document.body.classList.toggle('hide-spoilers', e.target.checked);
+function buildPicker(){
+  const sel = $('#mpick'); if(!sel) return;
+  const opts = nodes.filter(n => n.gen !== 'gen0' || !n.name.includes('&'))
+    .filter(n => !isHidden(n.sp))
+    .sort((a,b) => a.name.replace(/^.*"(.*)".*$/,'$1').localeCompare(b.name.replace(/^.*"(.*)".*$/,'$1')));
+  sel.innerHTML = `<option value="">Jump to a character…</option>` + opts.map(n => `<option value="${n.id}">${esc(n.name)}</option>`).join('');
+  sel.value = mapFocus && opts.some(o => o.id === mapFocus) ? mapFocus : '';
+}
+$('#mpick').addEventListener('change', e => { const id = e.target.value || null; focusNode(id); if(id) centerOn(id); });
+$('#mclear').addEventListener('click', () => focusNode(null));
+
+// Mouse drag-to-pan on desktop (touch devices already swipe-scroll)
+function enableDragPan(){
+  const box = $('#map-scroll');
+  let down = false, sx = 0, sy = 0, sl = 0, st = 0, moved = false;
+  box.addEventListener('mousedown', e => { if(e.button !== 0) return; down = true; moved = false; sx = e.clientX; sy = e.clientY; sl = box.scrollLeft; st = box.scrollTop; });
+  addEventListener('mousemove', e => {
+    if(!down) return;
+    const dx = e.clientX - sx, dy = e.clientY - sy;
+    if(Math.abs(dx) + Math.abs(dy) > 4){ moved = true; box.style.cursor = 'grabbing'; }
+    box.scrollLeft = sl - dx; box.scrollTop = st - dy;
+  });
+  addEventListener('mouseup', () => { down = false; box.style.cursor = ''; });
+  box.addEventListener('click', e => { if(moved){ e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
+}
+
+/* ===================== GLOBAL SEARCH ===================== */
+function charTarget(id){
+  if(document.querySelector(`.family-block .card[data-id="${id}"]`)) return 'fam:' + id;
+  if(document.querySelector(`.bubble[data-id="${id}"]`)) return 'bub:' + id;
+  return 'map:' + id;
+}
+function buildIndex(){
+  const idx = [];
+  nodes.forEach(n => {
+    if(n.gen === 'gen0' && n.name.includes('&')) return;
+    const card = document.querySelector(`.family-block .card[data-id="${n.id}"]`);
+    const role = card ? (card.querySelector('.role')?.textContent || '') : '';
+    idx.push({k:'Character', t:n.name, s:[n.book ? 'Book: ' + n.book : '', role].filter(Boolean).join(' · '),
+      hay:[n.name, n.book, role, card?.textContent].join(' '), sp:n.sp, go:charTarget(n.id)});
+  });
+  $$('.book').forEach(b => {
+    const couple = b.querySelector('.couple');
+    idx.push({k:'Book', t:b.querySelector('.title').textContent, s:couple.textContent, hay:b.textContent, sp:0,
+      ssp: Number(couple.dataset.sp || 0), go:'book:' + b.id});
+  });
+  $$('.family-block').forEach(f => {
+    const name = f.querySelector('.family-name').childNodes[0].textContent.trim();
+    idx.push({k:'Family', t:name, s:f.querySelector('.family-name small').textContent, hay:name, sp:Number(f.dataset.sp || 0), go:'famblock:' + f.id});
+  });
+  $$('.fg').forEach(g => {
+    const t = g.querySelector('h3').textContent;
+    idx.push({k:'Friend group', t, s:g.querySelector('.fg-title span').textContent, hay:t, sp:Number(g.dataset.sp || 0), go:'fg:' + g.id});
+  });
+  return idx;
+}
+const INDEX = buildIndex();
+const gq = $('#gq'), gres = $('#gres');
+
+function gsearch(){
+  const q = gq.value.trim().toLowerCase();
+  if(q.length < 2){ gres.hidden = true; return; }
+  const terms = q.split(/\s+/);
+  const hits = INDEX.map(x => {
+    const h = x.hay.toLowerCase(), t = x.t.toLowerCase();
+    if(!terms.every(w => h.includes(w))) return null;
+    return {...x, score:(t.startsWith(q) ? 3 : 0) + (t.includes(q) ? 2 : 0) + (x.k === 'Character' ? .5 : 0) - (isHidden(x.sp) ? 2 : 0)};
+  }).filter(Boolean).sort((a,b) => b.score - a.score).slice(0, 14);
+  gres.innerHTML = hits.length ? hits.map(h => {
+    const hid = isHidden(h.sp), shid = hid || isHidden(h.ssp);
+    return `<button type="button" data-gg="${h.go}" class="${hid ? 'hid' : ''}"><span class="k">${hid ? 'Spoiler' : h.k}</span><span><b>${esc(hid ? 'Hidden spoiler' : h.t)}</b><span class="s" style="${shid && !hid ? 'filter:blur(5px)' : ''}">${esc(hid ? 'From a book you haven\'t reached' : h.s)}</span></span></button>`;
+  }).join('') : `<div class="empty">Nothing found for &ldquo;${esc(gq.value)}&rdquo;.</div>`;
+  gres.hidden = false;
+}
+gq.addEventListener('input', gsearch);
+gq.addEventListener('focus', gsearch);
+gq.addEventListener('keydown', e => {
+  const bs = [...gres.querySelectorAll('button')];
+  if(e.key === 'ArrowDown'){ e.preventDefault(); bs[0]?.focus(); }
+  else if(e.key === 'Enter' && bs[0]){ bs[0].click(); }
+  else if(e.key === 'Escape'){ gres.hidden = true; gq.blur(); }
+});
+gres.addEventListener('keydown', e => {
+  const bs = [...gres.querySelectorAll('button')], i = bs.indexOf(document.activeElement);
+  if(e.key === 'ArrowDown' || e.key === 'ArrowUp'){ e.preventDefault(); bs[(i + (e.key === 'ArrowDown' ? 1 : -1) + bs.length) % bs.length]?.focus(); }
+  else if(e.key === 'Escape'){ gres.hidden = true; gq.focus(); }
+});
+gres.addEventListener('click', e => {
+  const b = e.target.closest('[data-gg]'); if(!b) return;
+  gres.hidden = true; gq.blur(); go(b.dataset.gg);
+});
+document.addEventListener('click', e => { if(!e.target.closest('.gsearch')) gres.hidden = true; });
+
+function go(ref){
+  const i = ref.indexOf(':'), k = ref.slice(0, i), id = ref.slice(i + 1);
+  if(k === 'fam')       show('families', () => { clearFamilyFocus(); const c = $(`.family-block .card[data-id="${id}"]`); familyFocus(id); familyFocused = id; flash(c); });
+  else if(k === 'bub')  show('friends', () => flash($(`.bubble[data-id="${id}"]`)));
+  else if(k === 'map')  { mapFocus = id; show('map', () => centerOn(id)); }
+  else if(k === 'book') show('books', () => flash(document.getElementById(id)));
+  else if(k === 'famblock') show('families', () => flash(document.getElementById(id)));
+  else if(k === 'fg')   show('friends', () => flash(document.getElementById(id)));
+}
+
+/* ===================== START ===================== */
+renderTabs();
+show(current);
+applySpoilers();
+if(spLevel === null) openSpoilers();
+
+let lastW = innerWidth;
+addEventListener('resize', () => {
+  clearTimeout(window._rz);
+  window._rz = setTimeout(() => { if(Math.abs(innerWidth - lastW) < 40) return; lastW = innerWidth; if(current === 'map') renderPanel(); }, 200);
 });
 </script>
-
 </body>
 </html>
